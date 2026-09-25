@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Energy Map · The "4 Pillars" Method · Lena Aronov</title>
+<style>
+:root{--ink:#14110f;--paper:#f7f4ef;--card:#fffdfa;--gold:#a8834e;--gold-soft:#e6d9c4;
+--muted:#6b6157;--line:#e3dbd0;--bad:#9a4f3f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px 80px}
+header{background:var(--ink);color:var(--paper);padding:56px 24px 48px;margin-bottom:40px}
+header .wrap{padding-bottom:0}
+h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(28px,5vw,44px);letter-spacing:-.5px;margin:0 0 14px;line-height:1.15}
+.sub{color:#c9bfb2;font-size:16px;margin:0;max-width:580px}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 18px}
+h2{font-family:Georgia,serif;font-weight:400;font-size:26px;margin:0 0 4px}
+h3{font-family:Georgia,serif;font-weight:400;font-size:21px;margin:0 0 10px}
+.pillar-note{color:var(--muted);font-size:15px;margin:0 0 28px}
+.card{background:var(--card);border:none;border-radius:12px;box-shadow: 0 20px 40px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.05);padding:48px 40px;margin-bottom:24px}
+table.scale{width:100%;border-collapse:separate;border-spacing:0 8px;margin:24px 0;font-size:15px}
+table.scale td{padding:14px 20px;background:var(--paper);}
+table.scale td:first-child{width:60px;color:var(--gold);font-weight:600;border-radius:6px 0 0 6px;text-align:center;} table.scale td:last-child{border-radius:0 6px 6px 0;}
+.q{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.q:last-child{border-bottom:none}
+.q .num{color:var(--gold);font-size:13px;min-width:26px;padding-top:3px;font-variant-numeric:tabular-nums}
+.q .txt{flex:1;min-width:220px;font-size:16px}
+.opts{display:flex;gap:6px;flex-shrink:0}
+.opts label{cursor:pointer}
+.opts input{position:absolute;opacity:0;width:0;height:0}
+.opts span{display:flex;align-items:center;justify-content:center;width:42px;height:42px;
+border:1px solid var(--line);border-radius:50%;font-size:14px;color:var(--muted);transition:.15s;user-select:none}
+.opts input:checked + span{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.opts label:hover span{border-color:var(--gold)}
+.sect-title{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:28px 0 4px;padding-top:8px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:28px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer;border:none;padding:15px 34px;transition:.15s}
+.primary{background:var(--ink);color:var(--paper);font-size:16px;font-weight:500;border-radius:6px;box-shadow: 0 4px 12px rgba(0,0,0,0.15);padding: 16px 48px;letter-spacing: .02em;}
+.primary:hover{background:#2c2621;transform:translateY(-1px);box-shadow: 0 6px 16px rgba(0,0,0,0.2);}
+.ghost{background:none;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:15px 32px;}
+.ghost:hover{border-color:var(--gold);color:var(--ink)}
+.progress{height:2px;background:var(--line);margin-bottom:36px}
+.progress i{display:block;height:2px;background:var(--gold);transition:.3s}
+.counter{font-size:13px;color:var(--muted)}
+.hidden{display:none}
+.warnmsg{color:var(--bad);font-size:14px;margin-top:12px}
+.bar-row{margin-bottom:22px}
+.bar-top{display:flex;justify-content:space-between;font-size:15px;margin-bottom:7px;gap:12px}
+.bar-top b{font-weight:600;font-variant-numeric:tabular-nums}
+.bar{height:10px;background:var(--gold-soft);overflow:hidden}
+.bar i{display:block;height:10px;transition:width .8s ease}
+.tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border:1px solid currentColor;margin-left:8px;white-space:nowrap}
+.verdict{background:var(--ink);color:var(--paper);padding:48px;border-radius:12px;box-shadow: 0 20px 40px rgba(0,0,0,0.15);margin-bottom:24px}
+.verdict h3{margin:0 0 14px}
+.verdict p{color:#d8cfc3;margin:0 0 12px}
+.verdict p:last-child{margin-bottom:0}
+.gate{border:1px solid rgba(168,131,78,0.3);background:var(--card);border-radius:12px;padding:48px;box-shadow: 0 10px 30px rgba(168,131,78,0.08);margin-bottom:24px}
+.gate h3{margin:0 0 12px}
+.gate .lead{color:var(--muted);margin:0 0 26px}
+.gate-list{margin:0 0 18px;padding-left:20px;color:var(--muted)}
+.gate-list li{margin-bottom:10px;line-height:1.6}
+.gate-list b{color:var(--ink)}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.field input{width:100%;padding:16px;border:1px solid var(--line);border-radius:6px;background:#fff;font:inherit;color:var(--ink);box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);}
+.field input:focus{outline:none;border-color:var(--gold)}
+.gate button{width:100%;margin-top:10px}
+.fineprint{font-size:13px;color:var(--muted);margin-top:16px;text-align:center}
+.locked{position:relative;max-height:180px;overflow:hidden;margin-bottom:24px}
+.locked:after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;
+background:linear-gradient(transparent,var(--paper))}
+.cta{text-align:center;padding:44px 32px;border:1px solid var(--gold);background:var(--card)}
+.cta h3{font-size:26px}
+.cta p{color:var(--muted);max-width:500px;margin:0 auto 26px}
+a.btn{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;padding:16px 40px;font-size:16px}
+a.btn:hover{background:#2c2621}
+.sig{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;text-align:center}
+.legend td{padding:8px 10px;border-bottom:1px solid var(--line);font-size:15px;vertical-align:top}
+.legend td:first-child{white-space:nowrap;color:var(--gold);font-variant-numeric:tabular-nums}
+.nums{font-size:15px;letter-spacing:.02em}
+@media(max-width:560px){.q{gap:10px}.opts span{width:32px;height:32px}.card,.gate,.verdict{padding:22px}
+.result-header{padding:30px 20px;}
+.rh-row-top{flex-wrap:wrap;}
+.rh-tag{margin-left:0; margin-top:4px; width:100%; order:3; border:none; padding:0; text-align:left;}
+.rh-score{order:2;}
+}
+.result-header{background:var(--paper); padding:40px 48px; border:1px solid var(--line); margin-bottom:24px;}
+.rh-top{border-bottom:1px solid rgba(0,0,0,0.08); padding-bottom:24px; margin-bottom:32px;}
+.rh-top h2{font-size:32px; margin:0 0 12px; font-weight:400; font-family:var(--serif);}
+.rh-meta{font-size:15px; color:var(--muted); letter-spacing:0.02em; margin:0;}
+.rh-row{margin-bottom:28px;}
+.rh-row:last-child{margin-bottom:0;}
+.rh-row-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
+.rh-name{font-size:16px; color:var(--ink);}
+.rh-tag{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border:1px solid; margin-left:16px; margin-right:auto;}
+.rh-score{font-weight:600; font-size:18px; font-variant-numeric:tabular-nums;}
+.rh-bar-bg{height:12px; background:var(--gold-soft); width:100%;}
+.rh-bar-fill{height:100%; transition:width 1s cubic-bezier(0.2, 0.8, 0.2, 1);}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <a href="index.html" class="eyebrow" style="display:inline-block; text-decoration:none; cursor:pointer;">The "4 Pillars" Method · Lena Aronov</a>
+  <h1>Energy map</h1>
+  <p class="sub">Take a deep dive into your energy system. In just 7 minutes, we will digitize your current state, uncover hidden resource leaks, and provide a precise strategy for systemic recovery.</p>
+</div></header>
+
+<div class="wrap">
+  <div class="progress"><i id="pbar" style="width:0%"></i></div>
+
+  <section id="s0" class="card">
+    <h2>Instructions</h2>
+    <p class="pillar-note" style="margin-bottom: 24px;">Time required: 6–7 minutes.</p>
+    <p style="margin-bottom: 12px;"><b>1. Assess reality.</b> Answer based on what has been happening in your life over the last three months, not what you wish it to be.</p>
+    <p style="margin-bottom: 12px;"><b>2. Do not overthink.</b> Your first response is the most accurate. This tool measures your actual reactions, not your logical conclusions.</p>
+    <p>Answer with absolute honesty, otherwise the results will be useless.</p>
+    <table class="scale">
+      <tr><td>0</td><td>Never</td></tr><tr><td>1</td><td>Rarely</td></tr>
+      <tr><td>2</td><td>Sometimes</td></tr><tr><td>3</td><td>Often</td></tr>
+      <tr><td>4</td><td>Almost always</td></tr>
+    </table>
+    <div class="nav">
+      <button class="primary" onclick="go(1)">Start</button></div>
+  </section>
+
+  <section id="quiz" class="hidden"></section>
+  <section id="leadgate" class="hidden card" style="text-align: center; padding: 48px 40px; margin-top: 40px; background: var(--white);">
+    <h2 style="margin-bottom: 16px;">Your Breakdown is Ready</h2>
+    <p style="color: var(--muted); margin-bottom: 32px; font-size: 16px;">Provide your email to receive the results in your inbox and see them right now.</p>
+    <form id="leadform" style="max-width: 360px; margin: 0 auto; text-align: left;">
+      <input type="text" id="lf-name" name="name" placeholder="Your Name" required style="width: 100%; padding: 14px 16px; margin-bottom: 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: inherit; font-size: 16px; box-sizing: border-box; background: var(--paper);">
+      <input type="email" id="lf-email" name="email" placeholder="Your Email" required style="width: 100%; padding: 14px 16px; margin-bottom: 24px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: inherit; font-size: 16px; box-sizing: border-box; background: var(--paper);">
+      <button type="submit" class="btn" id="lf-submit" style="width: 100%;">SHOW RESULTS</button>
+    </form>
+  </section>
+  <section id="result" class="hidden"></section>
+</div>
+
+<script>
+const WEBHOOK = 'https://script.google.com/macros/s/AKfycby-3rfW-zWTqS6Y1_JvcymQQ8XRqS7_ZMEdFE2TeNBGdhzRiLuDQd4ydzCFUn8OIiYl/exec';
+
+const PILLARS=[
+{key:'m',name:'Mental Pillar',note:'Head: clarity, decisions, attention, inner noise.',
+ groups:[['Thought flow and noise',['I wake up at night, and a list of tasks immediately turns on in my head.','Thoughts go in circles, and I cannot stop them by willpower.','It is hard for me to finish one thought without jumping to another.']],
+['Decisions',['Decisions that I used to make in a minute now take days.','I double-check already made decisions several times.','By evening I cannot even choose what to eat.']],
+['Attention and focus',['I pick up my phone to do one thing, and twenty minutes later I realize I was doing something else.','It is hard for me to keep my attention on one task for more than fifteen minutes.','I work more hours but get less done than before.']],
+['Clarity and strategy',['I stopped seeing the big picture, I only see the immediate tasks.','I cannot articulate where my business is going in three years.','Strategic sessions have become a formality for me.']]]},
+{key:'f',name:'Physical Pillar',note:'Body: sleep, energy, tension, body signals.',
+ groups:[['Sleep',['I sleep less than six hours a day.','I fall asleep only with alcohol, sleeping pills, or complete exhaustion.','I wake up between three and five in the morning and do not fall back asleep.']],
+['Energy during the day',['By mid-day there is a dip, which I cover with coffee or sugar.','I run on caffeine, not my own energy.','In the morning I need thirty minutes to get into a working state.']],
+['Tension in the body',['My jaw is constantly clenched or my neck is tense.','My shoulders are like concrete, and it does not go away after a massage.','I hold my breath when I think about work.']],
+['Body signals',['My blood pressure jumps.','I have a pain or symptom that I have ignored for more than six months.','I postpone a visit to a specialist because I am afraid of what I will hear.']]]},
+{key:'d',name:'Spiritual Pillar',note:'Meaning: why, for what, what will remain.',
+ groups:[['Taste for life',['I achieved what I was aiming for and felt nothing.','I do not remember the last time I sincerely laughed.','I do not feel the taste of food and the smell of the morning.']],
+['Meaning and direction',['I cannot answer myself the question, why all this.','I serve the image of a successful person, but do not live.','I am bored winning by the rules that I myself created.']],
+['Inner support',['I do not understand who I am if you remove my position and my business.','I have nothing to lean on inside when everything falls apart outside.','I am afraid of silence: in it you can hear questions that have no answers.']],
+['Legacy',['I think that after me only the report and numbers will remain.','I am afraid of not having time to do what I came here for.','The thought of death causes not fear, but the bitterness of the undone.']]]},
+{key:'s',name:'Social Pillar',note:'Relationships, boundaries, roles and business structure.',
+ groups:[['Family and loved ones',['At home I am present with my body, but my thoughts remain in work.','I check my phone when my children or partner are talking to me.','I missed an important family event because of work in the last six months.']],
+['Loneliness',['I have no one to talk to about what is really happening to me.','I cannot be weak in front of the team, my family, or my partners.','I wear a mask of confidence when inside is emptiness.']],
+['Boundaries',['I cannot refuse when they ask me about work during non-working hours.','I do not have a single day a week without work messages.','I take a vacation with a laptop and work during it.']],
+['Team and delegation',['All important questions sooner or later come to me.','If I drop out for a week, the business will start to crumble.','My managers do not take responsibility, and I do not understand why.']]]}
+];
+
+const BANDS={"m":[["Pillar is holding","<p>Your head is clear. You make decisions without overpaying for them with your energy, your attention obeys you, and internal noise doesn't interfere with thinking.</p><p>This is a rare result for a person running a business. It means you either have a well-structured recovery routine, or your workload hasn't yet exceeded your capacity.</p><p>One note: the mental pillar collapses faster than the rest and almost always gives a signal last. A person notices they've stopped thinking only after they haven't been thinking for several months. If you have a drop in other pillars, watch your head especially closely: it will follow.</p>"],["First cracks","<p>You are still managing, but already using your reserves. Decisions are being made, but at a higher cost than before. There are days when your head simply doesn't work by the evening.</p><p>This is the stage where you can still get by with minimal intervention. The mental pillar recovers faster than the rest: with targeted work, a shift is usually noticeable in two weeks, because the brain doesn't need to grow new tissue, it just needs to stop working in a state of constant anxiety.</p><p>What happens if left untouched: cracks don't stay cracks. In six months, in this same test, you will score 60–70, and then the work will take longer and go deeper.</p>"],["Pillar has sagged","<p>This is your main leak. You pay more for every decision than it's worth, and by evening you have no energy left even for everyday choices.</p><p>What's important to understand here: it's not that you've become worse at thinking. Your brain is physically operating in a mode of constant background threat scanning. In this mode, the prefrontal cortex, which is responsible for strategy and complex decisions, receives resources on a residual basis. You haven't become dumber. Your access to your own thinking is blocked.</p><p>Hence the characteristic effect: you work more hours and get fewer results, and any attempt to \"pull yourself together\" and work harder only worsens the picture.</p><p>The good news is that this is the fastest pillar to recover. A noticeable shift usually occurs in the first two weeks, because you remove the cause of the noise, not the symptom.</p>"],["Pillar has collapsed","<p>Your thinking is not your tool right now. It works in emergency mode: it reacts, but it doesn't choose.</p><p>In this state, a person continues to manage their business, and this is the most dangerous part. Decisions are made, but their quality drops so much that in six months you have to deal with the consequences. You don't see this from the inside: to notice the drop in thinking quality, you need that very thinking, which is currently absent.</p><p>Signs that you are exactly here: you don't remember yesterday, you reread the same email three times, you postpone decisions for weeks, and at night you can't stop the flow of thoughts.</p><p>This state is not solved by rest. A two-week vacation will bring relief and an immediate rollback upon return, because the cause is not accumulated fatigue, but how your day and your workload are structured.</p><p>You shouldn't start with the head. A head in such a state cannot fix itself. You need to start with the body and by unloading your decision-making circuit.</p>"]],"f":[["Pillar is holding","<p>Your body is working and providing resources. Sleep restores you, your energy is steady, and your body doesn't send signals that you have to ignore.</p><p>This is your main asset, and also your insurance: as long as the physical pillar is intact, the other three can be raised relatively quickly. All recovery processes, including mental ones, run on physical resources.</p><p>If you have sagged in other pillars, you are luckier than most: you have something to work with.</p>"],["First cracks","<p>Your body has started to remind you of its existence. Dips in energy appear during the day, coffee has become a necessity rather than a pleasure, and there's nothing left by evening.</p><p>This is the stage where everything is still reversible with brief intervention. Your body is asking for now, not demanding.</p><p>What's important: at this stage, almost everyone tries to solve the problem by adding things. They add sports, add vitamins, add waking up early. This works against you. A body in a state of deficit doesn't need additional load, it needs the leak to be fixed. First we find where the energy is going, then we add.</p>"],["Pillar has sagged","<p>Your main leak is in your body. And this, oddly enough, is the best possible diagnosis.</p><p>Why: almost everyone in this state is convinced they have a motivation problem. The drive is gone, they don't want anything, goals don't inspire them. A person starts looking for new goals, changing their niche, reading about the meaning of life. But in reality, they just haven't been getting enough sleep for a few years.</p><p>Motivation is not character. It's biochemistry that is produced in the body under certain conditions. Take away sleep, and in a few months, the most driven person will stop wanting anything at all. Bring back sleep, and the desire will return on its own, without a single conversation about motivation.</p><p>I've seen this dozens of times. A person comes with a request \"I lost my motivation, I don't want anything\", we don't touch motivation at all, we put their sleep and routine in order, and in three weeks they have so many ideas they can't even write them down.</p><p>What else is included here besides sleep: chronic muscle tension that you no longer notice, holding your breath, deficiencies you don't know about, and symptoms you explain away with the word \"overwork\".</p>"],["Pillar has collapsed","<p>Your body is no longer signaling, it is demanding.</p><p>Blood pressure spikes, a racing heart without exertion, a symptom you've been ignoring for over half a year, the fear of going to a specialist because you're afraid of what you'll hear. Each of these points can be explained separately. Together, they form a picture of a body holding on at its limit.</p><p>I'll be blunt, without softening: in this zone, the question is no longer about efficiency or quality of life. The question here is how much time you have until your body makes the decision for you.</p><p>Psychosomatics doesn't work as a metaphor. When the nervous system lives in a mobilization mode for a long time, the body starts shutting down functions it considers secondary: digestion, recovery, immunity, reproduction. This is not a breakdown, it's a survival program. It will stop working against you only when the body receives a signal that the threat has passed.</p><p>The first thing to do: get to a doctor and close the medical part. Working with your state does not replace a medical examination. The second: remove the load, do not add \"working on yourself\" to it.</p>"]],"d":[["Pillar is holding","<p>You know what all this is for. You have an internal pillar that does not depend on results, status, or the evaluation of others.</p><p>This is what most people at your level lack. It is exactly this pillar that determines whether you will survive a crisis or if it will dismantle you: when the external collapses, a person stands exactly as firm as their internal pillar is.</p><p>Hold onto it. It takes the longest of all to recover.</p>"],["First cracks","<p>Questions have appeared that weren't there before. \"Why all this?\", \"What's next?\", \"I've been working towards this for twenty years and for some reason I feel nothing\".</p><p>Usually, these questions come not during a crisis, but conversely, after an achievement. While you were running, there was no question: the goal replaced the meaning. The goal is achieved, and it turns out they are not the same thing.</p><p>This is a normal and healthy stage, if it's not muffled. It's usually muffled in two ways: with a bigger new goal, or with complete denial (\"I have no time to think about nonsense\"). Both methods work, but not for long, and each time worse than before.</p>"],["Pillar has sagged","<p>Your main leak is in meaning, and this is the hardest sag to recognize.</p><p>You most likely won't be able to clearly explain to those around you what's wrong with you. On the outside, everything is fine: the business is running, the money is there, your family is present, your health is tolerable. There is nothing to complain about, and this only makes it worse, because additional guilt appears for feeling bad while objectively having a good life.</p><p>How it looks from the inside: you achieve and feel nothing. You close the deal you dreamed of, and on the balcony afterwards, you catch yourself thinking that you don't care. You don't remember when you last genuinely laughed. You do what you do because you have to, because of responsibility, because everyone depends on you.</p><p>This is not depression in the clinical sense and not laziness. It's a state when the system of goals has exhausted itself, and a new one hasn't appeared. It's empty inside not because you are empty, but because what filled you up for twenty years has stopped filling you.</p><p>An important warning: this pillar cannot be fixed by thinking or reading. Meaning is not found in the head, it is found in experience. Therefore, all attempts to \"sit down and think about what I want\" end with nothing.</p>"],["Pillar has collapsed","<p>You don't understand who you are if your title and your business are taken away.</p><p>This is a state in which a person can live for years, and externally no one will notice. They will work, earn money, go on vacation, and speak at conferences. But inside there is scorched earth and a quiet question at 3 AM that has no answer.</p><p>Here a characteristic thought appears: not about death with fear, but about death with bitterness. \"Is this really it? Am I just an archive of numbers?\" If this thought is familiar to you, you are in this zone.</p><p>What's important to understand about this zone: it ends in two ways. Either a person destroys what they have built because they can no longer stand it: they leave the business, the marriage, the country, often abruptly and destructively. Or the body takes a break for them, and then it's an illness.</p><p>There is a third path, but it requires work, not a decision. Meaning cannot be restored by willpower and it doesn't come from reading the right book. It must be assembled anew, and this takes time.</p><p>I must say separately: if thoughts appear in this state that there is no reason to live, this is not a topic for working on your state. This is a topic that requires you to go to a crisis specialist, and go immediately.</p>"]],"s":[["Pillar is holding","<p>You have established boundaries, your business is not completely tied to you, and there are people you can be yourself with.</p><p>This is a rarity among those who build their own business. Usually, this pillar sags first and stays sagged the longest, because its sag is the easiest to justify: \"it's just a phase right now\", \"I'll catch up later\", \"I'm working for them anyway\".</p><p>You don't have this. It means you have somewhere to return to, and this is what will pull you out of any other sag.</p>"],["First cracks","<p>Boundaries have blurred. Work is bleeding into your personal life, you are not always mentally present at home, and vacations are taken with a laptop.</p><p>It's not critical yet, but there is a pattern: the social pillar doesn't collapse abruptly, it sags invisibly and gradually, and at some point a person realizes they don't have a single conversation left that isn't about business.</p><p>Check yourself with one question: who can you talk to about what is really happening with you? If the answer takes more than five seconds, the crack is deeper than it seems.</p>"],["Pillar has sagged","<p>Your main leak is in structure, and this is the most underestimated type of burnout.</p><p>The mechanics working here are almost never linked to a person's state: as long as all decisions lead to one person, their head never turns off. Not because they don't know how to rest, but because the system genuinely requires their constant presence. They can't switch off, because if they switch off, everything will stop.</p><p>You built what was supposed to give you freedom, and you got a construction that rests on your wear and tear.</p><p>From this flows the main point: it is useless to fix this sag through practices, meditations, and working with your head. You can learn to relax as much as you want, but if tomorrow forty questions come to you again that could have been resolved without you, the effect will disappear by lunch.</p><p>It's not the person that needs fixing here, it's the structure: who is responsible for what, where your boundaries are, what you do yourself and why. This is not about psychology, this is about management.</p><p>The second part of this pillar, which is spoken about less often: loneliness. You cannot be weak in front of the team, the partners, and often the family. You wear an indestructible mask, and the longer you wear it, the fewer people are left who have seen you without it.</p>"],["Pillar has collapsed","<p>You are the bottleneck of your own business and simultaneously a person who has no one to talk to about it.</p><p>In this zone, two things usually coincide. The first: the business physically cannot exist without your daily participation, and you know it. The second: at home, you are no longer expected as a person, you are expected as a function, and you know this too.</p><p>A characteristic sign: you were told that you have become difficult to deal with, and you understand that it's true, but you don't understand what to do about it.</p><p>There is a fork in the road here that must be named directly. This state ends either with a restructuring of the structure, or with a loss. Most often a loss of relationships, because business endures longer than people do.</p><p>Work in this zone doesn't begin with conversations about balance. It begins with analyzing the construction: what is actually tied to you, what can be removed next week, and what will take months to rebuild. Usually, the first third of the workload can be removed faster than a person expects, and this provides breathing room for everything else.</p>"]]};
+const LEVELS=[["System is holding","<p>Your four pillars are working. There is tension, but no leak: what you spend, you restore.</p><p>This is the state for which people come to programs. You already have it, and the main task now is not to improve, but not to lose it. Pillars do not collapse in a crisis, but during a period of growth, when it seems that you can push a little harder.</p>"],["Working on reserves","<p>You are managing, but not through recovery, but through reserves. Reserves are finite.</p><p>Externally, everything looks normal at this level, and this is the trap: there is no reason to change anything because it's still working out. Usually people start taking action at the next level, when things stop working, and then there is three times as much work.</p><p>Right now you have a window where intervention is short and cheap.</p>"],["System has sagged","<p>More than half of your resources go into leaks. You are working, but every action costs you more than it should.</p><p>At this level, a person has usually already tried to do something: vacation, sports, supplements, maybe therapy. And noticed that the effect doesn't last long. The reason is not that the methods are bad, but that they are targeted, while you have sagged in several places at once, and the pillars pull each other down.</p><p>What is needed here is not a single measure, but a sequence: in what order to raise them, because if you start with the wrong pillar, the result won't hold.</p>"],["Emergency mode","<p>All four pillars are overloaded simultaneously. Your body and psyche are running on emergency power.</p><p>I'll be frank: people in this state usually don't take tests. The fact that you made it to the end speaks for itself that there are still some resources, and that you already understand: you can't go on like this.</p><p>Partial measures don't work here, and \"I'll start on Monday\" doesn't work. You need to remove the load here, not add new self-development tasks to it. And the first thing you should do in the coming days: close the medical part, get to a doctor and check what you've been putting off for a long time.</p>"]];
+const PROFILES={"mf":["Overheated engine","<p>The head won't turn off, the body doesn't recover, and these two things hold each other in place.</p><p>The mechanics are simple: a sleep-deprived brain cannot stop the flow of thoughts, and the flow of thoughts prevents you from falling asleep. The circle closes, and tightens with every passing week.</p><p>This profile is good because it can be broken at one point: sleep. Not with discipline, not with meditations, not with willpower, but with restoring the physiology of sleep. When sleep returns, the mental noise drops on its own, without separate work on it.</p><p>A typical mistake of this profile: trying to calm the head first. It won't work. The head calms down on a well-rested body, not the other way around.</p>"],"ms":["Everything is tied to me","<p>The classic founder profile, and the most frequent of all.</p><p>Your head doesn't turn off not because you are an anxious person, but because you are truly the single point of assembly. Forty decisions a day come to you because there is nowhere else to go. The brain knows this and keeps the background running constantly.</p><p>Hence the main conclusion: working with the head directly in this profile is almost useless. Any relaxation technique will be washed away by the very first workday.</p><p>You need to dismantle the construction: what really requires you, what is drawn to you out of habit, and what you don't give away because you are afraid to lose control. It usually turns out that the first third of the load can be removed in a couple of weeks, and the head starts turning off on its own.</p>"],"md":["Smart and empty","<p>You think fast, but you don't understand why.</p><p>This profile is found in people who have been solving interesting problems for a long time and at some point noticed that the problems ran out. Not because there aren't any, but because they stopped being interesting. The head continues to work out of habit, grinding what no longer matters to you.</p><p>Hence a special kind of fatigue: not from the load, but from the meaninglessness of the load. Such fatigue cannot be cured by rest, because after resting you return to exactly the same place.</p><p>Work in this profile is not about efficiency, but about direction. Until there is an answer to \"where to\", any acceleration only increases irritation.</p>"],"fd":["Nowhere further","<p>The body is exhausted, there is no meaning, and this is the most dangerous combination of the six.</p><p>It is dangerous because there are no brakes here. The body provides no resources to change anything, and the lack of meaning removes the reason to change anything. A person in this profile is not fighting, they are waiting.</p><p>If this is your case, I will be direct: the body comes first. Not because it's more important, but because the question of meaning in an exhausted organism cannot be solved in principle. A brain on a deficit is physically incapable of seeing perspective, this is its normal operation in survival mode. You won't find the answer to the question \"why\" until you get some sleep.</p><p>The order is exactly this, and it's non-negotiable: physics first, meaning second.</p>"],"fs":["Pulling everything myself","<p>You are carrying a load that is physically impossible for one person to carry, and your body has started to issue the bill.</p><p>Here, the body's sag is not a separate problem, but a direct consequence of the structure. A person to whom everything flows cannot afford to sleep, eat normally, or stop, because stopping means the system will stop.</p><p>The good news is that this profile yields the fastest visible result. As soon as a portion of the load is removed from you, the body starts to recover almost immediately, because the organism usually still has reserves, it just wasn't allowed to use them.</p><p>You need to start by unloading the circuit, not by trying to sleep better while maintaining the same load.</p>"],"ds":["Alone among friends","<p>You don't understand what this is all for, and you have no one to talk to about it.</p><p>These two sags amplify each other in the most unpleasant way. Meaning is almost never born in solitude for a person: it appears in contact, in conversation, in reflection from another. And when there is no one around to whom you can tell the truth about your state, the question \"why\" remains unanswered for years.</p><p>The second layer: you cannot show this state to anyone in your environment. Not to the team, not to the partners, and it's pitiful or useless to show the family. Therefore, you wear a mask, and the longer you wear it, the stronger the feeling that no one has seen the real you for a very long time.</p><p>Work here begins not with the search for meaning, but with the appearance of at least one space where you don't have to keep a face. Then meaning assembles itself, because it finally has a place to manifest.</p>"]};
+const SPREAD=[["Targeted leak","<p>The gap between your pillars is large, and this is good news.</p><p>This means the leak is local: three pillars are holding, one is falling through. The system as a whole is alive, you are not dismantled, you just have a hole in one specific spot.</p><p>Such cases are fixed the fastest and cheapest. The work is targeted, and the result is seen throughout the whole system, because the pillars are connected: when it stops leaking in one place, the other three gain resources.</p><p>The only thing you shouldn't do: try to fix everything at once. This is the most common mistake of people with a targeted leak. A person sees the numbers, gets scared, and takes on everything: sports, meditation, a psychologist, restructuring the company. As a result, the load grows, and the hole remains in place.</p>"],["Uniform sag","<p>It has sagged evenly across all four pillars. There is no local hole, the system is working at its limit entirely.</p><p>This state is more complicated than a targeted one, but not more hopeless. It's just that the sequence of actions is critical here, and most people violate it.</p><p>The order is as follows: first the physical pillar, then the mental, then the social, then the spiritual. This is not about importance, this is about physics. Thinking cannot be restored on an exhausted body. The business structure cannot be rebuilt on non-functioning thinking. And only when resources appear and part of the load is removed, does the question \"what for\" make sense.</p><p>Trying to go in the reverse order, that is, starting with the search for meaning, is the most frequent and most expensive mistake. It costs people months and ends with the conclusion \"nothing helps me\".</p>"]];
+const SPECIAL={"allgood":["System is normal","<p>You are in the green zone across all four pillars. This is a rare result, and it's worth acknowledging.</p><p>You do not currently need the \"4 Pillars\" method program, and I am saying this directly, even though it's not profitable for me. Working with someone whose pillars are holding means fixing what isn't broken.</p><p>What makes sense to do: save these numbers and take the test again in three months. Pillars do not collapse in a crisis, but during an ascent, when it seems that you can push a little harder. Comparing two maps will show you the movement before you feel it.</p>"],"allbad":["Red zone","<p>All four pillars are in the critical zone simultaneously.</p><p>I won't soften it: this is a state where the question is no longer about efficiency and quality of life. The body and psyche are working on emergency power, and the fact that you are functioning means you are spending your last reserve.</p><p>What needs to be done in the coming days, not \"someday\": first — get to a doctor and close the medical part, check what you've been putting off. Working with your state does not replace a medical examination, and I will not undertake to work with someone who doesn't know what's wrong with their body. Second — remove the load, do not add useful habits, but remove: in this zone, any addition, including the most correct one, works against you. Third — if thoughts appear that there is no reason to live, you need to go not to a program, but to a crisis specialist, immediately, without delay.</p><p>When the medical part is closed and the load is removed, come back. You can and should work in this zone, but not from the end where they usually start.</p>"],"quiet":["Quiet crisis","<p>You have an unusual map: body, head, and relationships are fine, but meaning has sagged.</p><p>This is the most non-obvious option of all, and the most underestimated. It's difficult for you to explain to anyone what's going on, because objectively everything is good. You are not tired, not sick, you have normal relationships and a working business. There is nothing to complain about.</p><p>That's exactly why this state drags on for years. There is no pain that would force you to act. There is only a quiet background question that comes in rare moments of silence and to which there is no answer.</p><p>The bad news: it doesn't go away on its own. The good news: you have everything to dismantle it. The body provides resources, the head is working, there are people around. This is the best starting position possible, and work in such a situation goes quickly.</p>"],"engine":["An engine, not a person","<p>Your body is in a deep sag, while your head, meaning, and relationships hold on.</p><p>Such a map means that you have been compensating for physical exhaustion through character for a very long time. And you've succeeded, which is confirmed by the other three pillars.</p><p>The problem is that this always ends the same way. The psyche can pull the body for some time, but not indefinitely. At some point, the mental pillar collapses first, then the rest, and they collapse quickly because they were held up by a single resource.</p><p>Right now, you have the most advantageous window possible: only one thing needs to be fixed, and it fixes the fastest. If you wait for the other three to collapse, there will be significantly more work.</p>"],"structure":["Construction against the person","<p>You personally are fine: the body is working, the head is clear, there is meaning. Only the structure around you has sagged.</p><p>This is the map of a person who is so strong that they patch the holes in the system with their personal resources. You are pulling what should not be pulled by one person, and you are managing for now.</p><p>I'll tell you the main thing: this is not a psychological problem, and working with it through your state is pointless. Your state is fine. You have a problem with the construction of your business.</p><p>What works here is not a burnout program, but an analysis of the structure: roles, responsibility, delegation. In my case, this is the Adizes method, and this is literally the part for which it makes sense to step in.</p><p>If nothing is changed, the order of collapse will be like this: first relationships, then the body, then the head. Not the other way around.</p>"]};
+
+const answers={};let qIndex=0;let RES=null;
+const quizEl=document.getElementById('quiz');
+PILLARS.forEach((p,pi)=>{
+  const sec=document.createElement('div');sec.className='card hidden';sec.id='p'+pi;
+  let html=`<h2>${p.name}</h2><p class="pillar-note">${p.note}</p>`;
+  p.groups.forEach(([title,list])=>{
+    html+=`<div class="sect-title">${title}</div>`;
+    list.forEach(text=>{qIndex++;const id='q'+qIndex;let o='';
+      for(let v=0;v<=4;v++)o+=`<label><input type="radio" name="${id}" value="${v}" data-p="${pi}"><span>${v}</span></label>`;
+      html+=`<div class="q"><div class="num">${qIndex}</div><div class="txt">${text}</div><div class="opts">${o}</div></div>`;});
+  });
+  html+=`<div class="nav"><button class="ghost" onclick="go(${pi})">Back</button>
+    <span class="counter" id="c${pi}">0 of 12</span>
+    <button class="primary" onclick="next(${pi})">${pi===3?'Show result':'Next'}</button></div>
+    <p class="warnmsg hidden" id="w${pi}">There are unanswered questions left.</p>`;
+  sec.innerHTML=html;quizEl.appendChild(sec);
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.location.search.includes('result=1')) {
+    const saved = localStorage.getItem('saved_answers');
+    if (saved) {
+      Object.assign(answers, JSON.parse(saved));
+      showLeadGate();
+      show('result');
+    }
+  }
+});
+
+document.addEventListener('change',e=>{
+  if(e.target.type!=='radio')return;
+  answers[e.target.name]={v:+e.target.value,p:+e.target.dataset.p,n:+e.target.name.slice(1)};
+  PILLARS.forEach((_,pi)=>{const n=Object.values(answers).filter(a=>a.p===pi).length;
+    const el=document.getElementById('c'+pi);if(el)el.textContent=n+' of 12';});
+  document.getElementById('pbar').style.width=Object.keys(answers).length+'%';
+});
+
+function show(id){['s0','result','leadgate'].forEach(x=>document.getElementById(x).classList.add('hidden'));
+  PILLARS.forEach((_,i)=>document.getElementById('p'+i).classList.add('hidden'));
+  quizEl.classList.add('hidden');
+  if(id==='s0'||id==='result'){document.getElementById(id).classList.remove('hidden');}
+  else{quizEl.classList.remove('hidden');document.getElementById(id).classList.remove('hidden');}
+  window.scrollTo({top:0,behavior:'smooth'});}
+function go(n){n===0?show('s0'):show('p'+(n-1));}
+function next(pi){const n=Object.values(answers).filter(a=>a.p===pi).length;
+  const w=document.getElementById('w'+pi);
+  if(n<12){w.classList.remove('hidden');return;}
+  w.classList.add('hidden');pi===3?showLeadGate():show('p'+(pi+1));}
+
+function showLeadGate(){
+  document.getElementById('quiz').classList.add('hidden');
+  document.getElementById('p3').classList.add('hidden');
+  document.getElementById('leadgate').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+  buildResult();
+}
+
+function bandIdx(s){return s<=25?0:s<=50?1:s<=75?2:3;}
+function bandColor(i){return['#5c7a5e','#a8834e','#b3672f','#9a4f3f'][i];}
+
+function buildResult(){
+  const rawScores=PILLARS.map((p,pi)=>Object.values(answers).filter(a=>a.p===pi).reduce((s,a)=>s+a.v,0));
+  const scores=rawScores.map(rs => Math.round((rs / 48) * 100));
+  const total=scores.reduce((a,b)=>a+b,0);
+  window.TEST_SCORES = { scores, total };
+  const order=scores.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v);
+  const w1=order[0].i,w2=order[1].i;
+  const spread=order[0].v-order[3].v;
+  const key=[PILLARS[w1].key,PILLARS[w2].key].sort().join('');
+  const pkey=PROFILES[key]?key:PROFILES[key.split('').reverse().join('')]?key.split('').reverse().join(''):null;
+
+  let special=null;
+  if(scores.every(s=>s<=25))special='allgood';
+  else if(scores.every(s=>s>=76))special='allbad';
+  else if(scores[2]>50&&scores[0]<30&&scores[1]<30&&scores[3]<30)special='quiet';
+  else if(scores[1]>70&&scores[0]<40&&scores[2]<40&&scores[3]<40)special='engine';
+  else if(scores[3]>70&&scores[0]<40&&scores[1]<40&&scores[2]<40)special='structure';
+
+  RES={scores,total,w1,w2,spread,pkey,special,
+    level:total<=100?0:total<=200?1:total<=300?2:3};
+
+  let fullText = `System Level: ${LEVELS[RES.level][0]}\n\n${LEVELS[RES.level][1].replace(/<[^>]+>/g, '\n').trim()}\n\n`;
+  fullText += `Main Vulnerability: ${PILLARS[w1].name}\n\n${BANDS[PILLARS[w1].key][bandIdx(scores[w1])][1].replace(/<[^>]+>/g, '\n').trim()}\n\n`;
+  if (special || pkey) {
+    fullText += `Your Profile: ${special?SPECIAL[special][0]:PROFILES[pkey][0]}\n\n${(special?SPECIAL[special][1]:PROFILES[pkey][1]).replace(/<[^>]+>/g, '\n').trim()}\n\n`;
+  }
+  const sprIdx = spread >= 25 ? 0 : 1;
+  fullText += `Spread: ${SPREAD[sprIdx][0]}\n\n${SPREAD[sprIdx][1].replace(/<[^>]+>/g, '\n').trim()}\n`;
+  window.TEST_SCORES.fullText = fullText;
+
+  let html=`<div class="result-header">
+    <div class="rh-top">
+      <h2>Your audit results</h2>
+      <p class="rh-meta">${scores[0]} · ${scores[1]} · ${scores[2]} · ${scores[3]} — mental · physical · spiritual · social. Total ${total} out of 400.</p>
+    </div>
+    <div class="rh-bars">`;
+    
+  PILLARS.forEach((p,i)=>{const bi=bandIdx(scores[i]);
+    html+=`<div class="rh-row">
+      <div class="rh-row-top">
+        <span class="rh-name">${p.name}</span>
+        <span class="rh-tag" style="color:${bandColor(bi)};border-color:${bandColor(bi)}">${BANDS[p.key][bi][0]}</span>
+        <span class="rh-score">${scores[i]}</span>
+      </div>
+      <div class="rh-bar-bg"><div class="rh-bar-fill" style="width:${scores[i]}%;background:${bandColor(bi)}"></div></div>
+    </div>`;});
+    
+  html+=`</div></div>`;
+  
+  html+=`<div class="card">
+    <h2>Overall system level: ${LEVELS[RES.level][0]}</h2>
+    <p>${LEVELS[RES.level][1]}</p>
+  </div>`;
+  
+  html+=`<div class="card">
+    <h2>${PILLARS[w1].name}: ${scores[w1]} points. Your main leak</h2>
+    <p>${BANDS[PILLARS[w1].key][bandIdx(scores[w1])][1]}</p>
+  </div>`;
+  
+  if (special || pkey) {
+    let affectedPillars = '';
+    if (pkey) {
+      const keys = pkey.split('');
+      affectedPillars = PILLARS.find(p=>p.key===keys[0]).name + ' and ' + (PILLARS.find(p=>p.key===keys[1]).name).toLowerCase();
+    }
+    html+=`<div class="card">
+      <h2>Your profile: ${special?SPECIAL[special][0]:PROFILES[pkey][0]}</h2>
+      ${affectedPillars ? `<h3 style="margin-top:0; color:var(--gold);">${affectedPillars}</h3>` : ''}
+      <p>${special?SPECIAL[special][1]:PROFILES[pkey][1]}</p>
+    </div>`;
+  }
+  
+  html+=`<div class="card">
+    <h2>Pillar spread: ${SPREAD[sprIdx][0]}</h2>
+    <p>${SPREAD[sprIdx][1]}</p>
+  </div>`;
+  
+  html+=`<div class="card">
+    <h2>How to read the ranges</h2>
+    <table class="legend" style="margin-top:16px;">
+      <tr><td>0–25</td><td><b>Pillar holds.</b> Resource is present, this part of the system works for you.</td></tr>
+      <tr><td>26–50</td><td><b>First cracks.</b> Coping on reserves, not recovery.</td></tr>
+      <tr><td>51–75</td><td><b>Pillar sagged.</b> The main chunk of energy leaks here.</td></tr>
+      <tr><td>76–100</td><td><b>Pillar collapsed.</b> The body and psyche are in emergency mode.</td></tr>
+    </table>
+    <p style="margin-top:16px; font-size:14px; color:var(--muted);">A high score doesn't mean something is wrong with you. It means that one of the four pillars is overloaded and dragging the rest down with it. This can be fixed, and fixed precisely, if you know where to aim.</p>
+  </div>`;
+  
+  html+=`<div class="card" style="text-align:center;">
+    <h2>These numbers are just a symptom</h2>
+    <p style="margin-bottom:24px;">The audit shows where the system is losing resources, but it doesn't explain the mechanics of the breakdown. To change the scenario, simply resting more isn't enough—you need to rebuild the architecture of your pillars. In this short video, I explain how the method works and what to do with your vulnerability. Watch it before our personal session.</p>
+    <a class="btn" style="display:inline-block; margin-bottom:16px; font-weight:600;" href="https://go.peach.talk/KNP1waWT_8I">WATCH VIDEO</a>
+    <p style="color:var(--muted); font-size:14px;">Take your four numbers to the session: <b style="color:var(--ink);">Mental ${scores[0]} · Physical ${scores[1]} · Spiritual ${scores[2]} · Social ${scores[3]}</b></p>
+  </div>`;
+
+  document.getElementById('result').innerHTML=html;
+  document.getElementById('pbar').style.width='100%';
+}
+
+document.getElementById('leadform').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('lf-submit');
+  btn.textContent = 'SENDING...';
+  btn.style.opacity = '0.7';
+  
+  const name = document.getElementById('lf-name').value;
+  const email = document.getElementById('lf-email').value;
+  const s = window.TEST_SCORES.scores;
+  
+  const payload = new URLSearchParams();
+  payload.append('lang', 'en');
+  payload.append('name', name);
+  payload.append('email', email);
+  payload.append('Mental', s[0]);
+  payload.append('Physical', s[1]);
+  payload.append('Spiritual', s[2]);
+  payload.append('Social', s[3]);
+  payload.append('Total', window.TEST_SCORES.total);
+  payload.append('Разбор', window.TEST_SCORES.fullText);
+  
+  fetch(WEBHOOK, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: payload
+  }).then(res => {
+    show('result');
+  }).catch(err => {
+    show('result');
+  });
+});
+</script>
+<footer style="margin-top:60px; padding:40px 24px; border-top:1px solid var(--line); background:var(--ink); color:var(--paper); text-align:center;">
+  <div style="font-size:14px; max-width:800px; margin:0 auto; color:rgba(255,255,255,0.6);">
+    © 2026 Diamond Generation. All rights reserved.<br><br>
+    <a href="privacy.html" style="color:rgba(255,255,255,0.6);text-decoration:none;">Privacy Policy</a> &nbsp;|&nbsp; 
+    <a href="terms.html" style="color:rgba(255,255,255,0.6);text-decoration:none;">Terms of Service</a><br><br>
+    Contact: support@diamondgeneration.store<br><br>
+    <span style="font-size:12px;opacity:0.7;display:block;margin-top:16px;">
+
+    </span>
+  </div>
+</footer>
+</body>
+</html>
