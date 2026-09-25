@@ -254,7 +254,7 @@ function buildResult(){
   }
   const sprIdx = spread >= 25 ? 0 : 1;
   fullText += `Характер просадки: ${SPREAD[sprIdx][0]}\n\n${SPREAD[sprIdx][1].replace(/<[^>]+>/g, '\n').trim()}\n`;
-  window.TEST_SCORES.fullText = fullText;
+  window.TEST_SCORES.fullText = fullText + '\n\n---\n\nЭти цифры — только симптом\n\nРазбор показывает, где система теряет ресурс, но не объясняет механику срыва. Чтобы изменить сценарий, недостаточно просто больше отдыхать — нужно пересобрать архитектуру опор. В коротком видео я объясняю, как работает метод и что делать с вашей уязвимостью. Посмотрите его перед нашей личной сессией.\n\nSMOTRET VIDEO: https://go.peach.talk/KNP1waWT_8I\n\nInstagram: https://instagram.com/lena.aronovv';
 
   /* --- КОРОТКИЙ РЕЗУЛЬТАТ + ГЕЙТ --- */
   let html=`<div class="result-header">
