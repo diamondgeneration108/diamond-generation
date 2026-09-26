@@ -111,24 +111,6 @@ h2{
 .hdr-right{display:flex;align-items:center;gap:24px;flex-shrink:0;}
 #clock{font-size:12px;color:rgba(255,255,255,.3);letter-spacing:.05em;font-variant-numeric:tabular-nums;}
 
-/* Utility grids (used by inner content pages) */
-.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-@media(max-width:1040px){.grid-2,.grid-3{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:580px){.grid-2,.grid-3{grid-template-columns:1fr;}}
-
-/* Burger (mobile nav toggle) */
-.burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:none;border:none;cursor:pointer;padding:0;flex-shrink:0;}
-.burger span{display:block;width:24px;height:2px;background:var(--white);transition:transform .25s,opacity .25s;}
-.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.burger.open span:nth-child(2){opacity:0;}
-.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-
-.mobile-nav{display:none;flex-direction:column;background:var(--navy);border-top:1px solid rgba(184,136,46,.2);}
-.mobile-nav.open{display:flex;}
-.mobile-nav a{padding:18px 32px;font-size:13px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.06);}
-.mobile-nav a:hover{color:var(--goldl);}
-
 /* ══════════════════════════════════════
    HERO
    ══════════════════════════════════════ */
@@ -659,10 +641,6 @@ footer{
 .footer-logo svg{width:24px;height:24px;}
 .footer-logo-text{font-size:13px;font-weight:200;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);}
 .footer-copy{font-size:13px;color:rgba(255,255,255,.2);}
-.footer-nav{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;}
-.footer-nav a{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.45);transition:color .2s;}
-.footer-nav a:hover{color:var(--goldl);}
-.footer-copy a{color:var(--goldl);text-decoration:none;}
 
 /* ══════════════════════════════════════
    RESPONSIVE
@@ -673,9 +651,8 @@ footer{
 @media(max-width:1040px){
   .wrap,.hdr-in,footer{padding-left:32px;padding-right:32px;}
 
-  /* Навигация скрыта, вместо неё бургер */
+  /* Навигация скрыта */
   .nav{display:none;}
-  .burger{display:flex;}
 
   /* Типографика */
   h2{font-size:34px;}
@@ -800,11 +777,10 @@ footer{
   .cta-section .btn{font-size:14px !important;padding:18px 24px !important;}
 
   /* Хедер */
-  .hdr-right{flex-shrink:0;gap:12px;}
-  #btn-nav{display:none;}
+  .hdr-right{flex-shrink:0;}
+  #btn-nav{padding:12px 20px;font-size:12px;}
   .logo-text{font-size:12px;letter-spacing:.18em;}
 
   /* Футер */
   footer{padding:40px 20px;}
-  .footer-nav{gap:14px 20px;}
 }

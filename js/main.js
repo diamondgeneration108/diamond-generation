@@ -17,29 +17,9 @@
 });
 
 /* Form */
-var ctaForm=document.querySelector('.cta-form');
-if(ctaForm) ctaForm.addEventListener('submit',function(){
+document.querySelector('.cta-form').addEventListener('submit',function(){
   var btn=document.getElementById('btn-submit');
-  if(btn){
-    btn.textContent='Отправка...';
-    btn.style.background='#2d6b2d';
-    btn.style.pointerEvents='none';
-  }
+  btn.textContent='Отправка...';
+  btn.style.background='#2d6b2d';
+  btn.style.pointerEvents='none';
 });
-
-/* Бургер-меню */
-(function(){
-  var burger=document.getElementById('burgerBtn');
-  var nav=document.getElementById('mobileNav');
-  if(!burger||!nav) return;
-  burger.addEventListener('click',function(){
-    burger.classList.toggle('open');
-    nav.classList.toggle('open');
-  });
-  nav.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click',function(){
-      burger.classList.remove('open');
-      nav.classList.remove('open');
-    });
-  });
-})();
