@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тест «4 Опоры» — Лена Аронов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout: структура образца (статья-история → тест-приложение по одному вопросу → сбор плана → почта → результат → план), в дорогой подаче: слоновая кость, глубокий синий, золото, антиква в заголовках. */
+  --ivory:#f6f1e8;
+  --paper:#fffdf8;
+  --ink:#0f1c2d;
+  --muted:#6e6a63;
+  --line:#e5ddcf;
+  --gold:#b08d57;
+  --gold-d:#8a6a3a;
+  --gold-l:#efe3cc;
+  --wine:#9a3c3c;
+  --amber:#b27a3a;
+  --sage:#5d8a6c;
+  --serif:"Cormorant Garamond", "Times New Roman", serif;
+  --sans:"Manrope", "Helvetica Neue", Arial, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+a{color:var(--gold-d)}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--serif);font-weight:600;text-wrap:balance;line-height:1.08;margin:0}
+.k{font:600 11px/1.4 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-d)}
+
+/* кнопки */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:#f6efe2;border:0;border-radius:2px;padding:19px 30px;font:600 13px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer;text-decoration:none;box-shadow:0 18px 34px -22px rgba(15,28,45,.9)}
+.btn::after{content:"";position:absolute;inset:4px;border:1px solid rgba(176,141,87,.55);pointer-events:none}
+.btn:hover{background:#17283f}
+.btn:disabled{background:#cfc8bb;box-shadow:none;cursor:not-allowed}
+.btn:disabled::after{border-color:transparent}
+.btn.wide{width:100%}
+.btn.gold{background:linear-gradient(180deg,#c3a26b,#9c7a45);color:#fff}
+.btn.gold::after{border-color:rgba(255,255,255,.4)}
+.btn.line{background:transparent;color:var(--ink);box-shadow:none;border:1px solid var(--ink)}
+.btn.line::after{display:none}
+.btn:focus-visible,.opt:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.mark{display:inline-block;width:22px;height:22px}
+
+/* ===== статья ===== */
+.masthead{background:var(--ink);color:#f3ead9;border-bottom:1px solid var(--gold)}
+.masthead .in{max-width:820px;margin:0 auto;padding:14px 20px;display:flex;justify-content:center;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.logo b{font-family:var(--serif);font-weight:600;font-size:22px;letter-spacing:.06em}
+.logo small{display:block;font:500 9.5px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;opacity:.65;margin-top:3px}
+.art{max-width:720px;margin:0 auto;padding:40px 22px 70px}
+.art .rubric{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.art .rubric::after{content:"";flex:1;height:1px;background:var(--line)}
+.art h1{font-size:clamp(36px,6.4vw,58px);font-weight:600;letter-spacing:-.01em}
+.art h1 em{font-style:italic;color:var(--gold-d)}
+.sub{font-family:var(--serif);font-size:clamp(21px,3.2vw,26px);font-style:italic;line-height:1.35;margin:18px 0 26px;color:#33302b}
+.sub mark{background:linear-gradient(transparent 58%,var(--gold-l) 58%);color:inherit;padding:0 2px}
+.by{display:flex;align-items:center;gap:14px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)}
+.by img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:1px solid var(--gold)}
+.by b{color:var(--ink);font-weight:600}
+.by .sep{margin-left:auto;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.hero{position:relative;margin:34px 0 10px}
+.hero::before{content:"";position:absolute;inset:14px -14px -14px 14px;border:1px solid var(--gold);z-index:0}
+.hero img{position:relative;z-index:1;width:100%;aspect-ratio:4/4.3;object-fit:cover;object-position:50% 20%}
+.cap{font:italic 15px/1.4 var(--serif);color:var(--muted);margin:26px 0 34px;text-align:right}
+.art p{margin:0 0 20px}
+.art p.lead::first-letter{font-family:var(--serif);float:left;font-size:84px;line-height:.78;padding:8px 12px 0 0;color:var(--gold-d)}
+.art p.b{font-weight:600}
+.art h2{font-size:clamp(30px,4.8vw,40px);margin:54px 0 20px}
+.art h2 small{display:block;margin-bottom:12px}
+.orn{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--gold);margin:50px 0 0}
+.orn::before,.orn::after{content:"";width:90px;height:1px;background:var(--gold);opacity:.6}
+.pull{margin:34px 0;padding:26px 0;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);font-family:var(--serif);font-size:clamp(25px,4vw,32px);line-height:1.25;font-style:italic;text-align:center}
+.side{display:grid;grid-template-columns:1fr 250px;gap:30px;align-items:start;margin:4px 0 20px}
+.side figure{margin:0}
+.side img{aspect-ratio:3/4;object-fit:cover;border:1px solid var(--line)}
+.side figcaption{font:italic 14px/1.4 var(--serif);color:var(--muted);margin-top:8px}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:24px 0 30px}
+.pillar{background:var(--paper);padding:24px 22px}
+.pillar .n{font-family:var(--serif);font-size:38px;line-height:1;color:var(--gold)}
+.pillar h3{font-size:26px;margin:8px 0 6px}
+.pillar p{margin:0;font-size:15px;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line);margin:40px 0}
+.facts div{padding:18px 12px 18px 0}
+.facts strong{display:block;font-family:var(--serif);font-size:34px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.facts span{font-size:12.5px;color:var(--muted);line-height:1.4;display:block;margin-top:8px}
+.qa{margin:20px 0 30px}
+.qa div{padding:20px 0;border-top:1px solid var(--line)}
+.qa div:last-child{border-bottom:1px solid var(--line)}
+.qa h3{font-size:24px;margin-bottom:6px}
+.qa p{margin:0;color:#3d3a35}
+.offer{position:relative;background:var(--ink);color:#f3ead9;padding:40px 34px;margin:44px 0 0;text-align:center}
+.offer::before{content:"";position:absolute;inset:10px;border:1px solid rgba(176,141,87,.6);pointer-events:none}
+.offer .k{color:var(--gold)}
+.offer h3{font-size:clamp(30px,5vw,40px);margin:12px 0 14px;color:#fff}
+.offer p{color:#c9c2b5;margin:0 auto 24px;max-width:460px}
+.offer ul{list-style:none;padding:0;margin:0 auto 28px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;font-size:14px;color:#e8dfcd}
+.offer li::before{content:"◆";color:var(--gold);font-size:9px;margin-right:8px;vertical-align:2px}
+.offer .btn{background:linear-gradient(180deg,#c3a26b,#9c7a45);color:#fff;position:relative}
+.foot{margin-top:46px;font-size:12.5px;color:var(--muted);text-align:center}
+
+/* ===== приложение теста ===== */
+#app{min-height:100vh;background:radial-gradient(900px 520px at 100% -10%,#efe4cf,transparent 65%),radial-gradient(800px 500px at -10% 110%,#e9e6df,transparent 65%),var(--ivory)}
+.bar-top{max-width:560px;margin:0 auto;padding:16px 20px 0;display:grid;grid-template-columns:44px 1fr 56px;align-items:center}
+.bar-top .logo{justify-content:center;color:var(--ink)}
+.bar-top .logo b{font-size:20px}
+.bar-top .cnt{text-align:right;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.bar-top .cnt b{color:var(--ink)}
+.backbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--paper);cursor:pointer;font-size:16px;color:var(--ink)}
+.prog{max-width:520px;margin:14px auto 0;height:2px;background:#e2d9c8}
+.prog i{display:block;height:100%;background:var(--gold);transition:width .35s}
+.screen{max-width:520px;margin:0 auto;padding:30px 20px 140px}
+.start h1{font-size:clamp(36px,8vw,48px);text-align:center;margin-top:8px}
+.start h1 em{font-style:italic;color:var(--gold-d)}
+.start .lede{text-align:center;color:var(--muted);margin:14px auto 28px;max-width:400px}
+.qcard{background:var(--paper);border:1px solid var(--line);padding:24px 22px;box-shadow:0 30px 60px -40px rgba(15,28,45,.45)}
+.block{font:600 11px/1.4 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-d);margin-bottom:10px}
+.q{font-family:var(--serif);font-size:clamp(28px,6vw,34px);font-weight:600;line-height:1.15;margin:0 0 6px}
+.hint{color:var(--muted);font-size:14px;margin:0}
+.opts{display:grid;gap:10px;margin-top:20px}
+.opt{display:flex;gap:14px;align-items:center;text-align:left;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:2px;padding:17px 18px;font:500 16px/1.4 var(--sans);cursor:pointer;width:100%;transition:border-color .2s,background .2s,box-shadow .2s}
+.opt::before{content:"";flex:none;width:18px;height:18px;border:1px solid #b9ad98;border-radius:50%}
+.opt.multi::before{border-radius:2px}
+.opt:hover{border-color:var(--gold);box-shadow:0 10px 24px -20px rgba(15,28,45,.6)}
+.opt.on{border-color:var(--gold);background:#fbf5ea}
+.opt.on::before{border-color:var(--gold);background:var(--gold);box-shadow:inset 0 0 0 3px var(--paper)}
+.opt.multi.on::before{box-shadow:none;background:var(--gold) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='white' stroke-width='2'/></svg>") center/14px no-repeat}
+.scale{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:24px}
+.scale .opt{flex-direction:column;justify-content:center;text-align:center;font-size:14px;padding:18px 6px;gap:10px}
+.dock{position:fixed;left:0;right:0;bottom:0;padding:16px 20px 20px;background:linear-gradient(rgba(246,241,232,0),var(--ivory) 35%)}
+.dock .in{max-width:520px;margin:0 auto}
+.legal{font-size:12px;color:var(--muted);text-align:center;margin-top:20px}
+
+.info{text-align:center}
+.info h2{font-size:clamp(30px,6.4vw,38px);margin:8px 0 14px}
+.info p{color:var(--muted)}
+.cycle{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:24px 0 10px;text-align:left}
+.cycle div{background:var(--paper);padding:18px 16px;font-size:14.5px;font-weight:500}
+.cycle div b{display:block;font-family:var(--serif);color:var(--gold);font-size:30px;line-height:1;margin-bottom:6px}
+.cycle div.hot b{color:var(--wine)}
+.cyclenote{font:italic 16px var(--serif);color:var(--muted);margin:4px 0 14px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:24px 0}
+.stats div{background:var(--paper);padding:22px 16px}
+.stats strong{display:block;font-family:var(--serif);font-size:44px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.stats span{font-size:13.5px;color:var(--muted)}
+.quote{background:var(--ink);color:#efe6d4;padding:22px;text-align:left;display:flex;gap:16px;align-items:center}
+.quote img{width:58px;height:58px;border-radius:50%;object-fit:cover;flex:none;border:1px solid var(--gold)}
+.quote p{margin:0;font:italic 19px/1.35 var(--serif)}
+.quote small{display:block;font:500 12px var(--sans);letter-spacing:.12em;color:var(--gold);margin-top:8px;font-style:normal;text-transform:uppercase}
+
+.build{text-align:center;padding-top:44px}
+.pct{font-family:var(--serif);font-size:96px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.steps{list-style:none;padding:0;margin:28px auto 0;max-width:330px;text-align:left}
+.steps li{display:flex;align-items:center;gap:12px;padding:11px 0;color:#a39c90;border-bottom:1px solid var(--line)}
+.steps li::before{content:"";width:16px;height:16px;border-radius:50%;border:1px solid #cbbfa9;flex:none}
+.steps li.ok{color:var(--ink)}
+.steps li.ok::before{border-color:var(--gold);background:var(--gold) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='white' stroke-width='2'/></svg>") center/11px no-repeat}
+
+.gate h2{font-size:clamp(30px,6.4vw,38px);text-align:center;margin:8px 0 12px}
+.gate .lede{text-align:center;color:var(--muted);margin:0 0 24px}
+.gate label.f{display:block;font:600 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:16px 0 8px}
+.gate input[type=text],.gate input[type=email]{width:100%;border:1px solid var(--line);border-radius:2px;padding:16px;font:16px var(--sans);background:var(--paper)}
+.gate input:focus{border-color:var(--gold);outline:none}
+.gate .chk{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);margin:18px 0 0}
+.gate .chk input{accent-color:var(--gold);margin-top:3px}
+.err{color:var(--wine);font-size:14px;min-height:20px;margin-top:10px;text-align:center}
+.lock{text-align:center;font-size:12.5px;color:var(--muted);margin-top:6px}
+
+.res h1{font-size:clamp(32px,7vw,42px);margin:8px 0 20px}
+.dark{position:relative;background:var(--ink);color:#fff;padding:24px 22px}
+.dark::before{content:"";position:absolute;inset:7px;border:1px solid rgba(176,141,87,.45);pointer-events:none}
+.dark .row{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#b9b2a5}
+.dark .lvl{font-family:var(--serif);font-size:26px;letter-spacing:0;text-transform:none}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:16px 0}
+.seg i{height:4px;background:#2a3a50}
+.seg i.on1{background:#7fa38c}.seg i.on2{background:#d1ad6b}.seg i.on3{background:#c98446}.seg i.on4{background:#c55a4f}
+.dark p{margin:0;color:#e8e1d3;font-size:15.5px}
+.voice{background:#f3e9da;border-left:2px solid var(--gold);padding:20px 22px;margin:14px 0}
+.voice .k{color:var(--gold-d)}
+.voice b{display:block;font:italic 600 27px/1.2 var(--serif);margin-top:8px}
+.table{background:var(--paper);border:1px solid var(--line)}
+.table div{display:flex;justify-content:space-between;gap:16px;padding:15px 18px;border-top:1px solid var(--line);font-size:15px}
+.table div:first-child{border-top:0}
+.table span{color:var(--muted);flex:none;max-width:45%}
+.table b{text-align:right;font-weight:600}
+
+.plan h1{font-size:clamp(32px,7vw,42px);text-align:center;margin:8px 0 24px}
+.pcard{background:var(--paper);border:1px solid var(--line);margin-bottom:12px}
+.pcard .top{display:grid;grid-template-columns:1fr 110px 60px;gap:14px;align-items:center;padding:18px}
+.chip{display:inline-block;font:700 10px var(--sans);letter-spacing:.16em;padding:4px 8px;color:#fff;background:var(--wine);margin-bottom:8px}
+.chip.mid{background:var(--amber)}.chip.ok{background:var(--sage)}
+.pcard h3{font-family:var(--serif);font-size:22px}
+.meter{height:4px;background:#ebe3d6}
+.meter i{display:block;height:100%;background:var(--wine)}
+.meter i.mid{background:var(--amber)}.meter i.ok{background:var(--sage)}
+.pcard .num{font-family:var(--serif);font-size:30px;text-align:right;font-variant-numeric:tabular-nums}
+.pcard .way{border-top:1px solid var(--line);padding:13px 18px;font-size:14.5px;background:#fbf7f0}
+.pcard .way b{color:var(--gold-d)}
+.good{position:relative;background:var(--ink);color:#fff;padding:26px 22px;text-align:center;margin:18px 0 8px}
+.good::before{content:"";position:absolute;inset:7px;border:1px solid rgba(176,141,87,.45)}
+.good h3{font-size:26px;margin-bottom:8px}
+.good p{margin:0;color:#d9d1c2;font-size:15px}
+.small{font-size:12.5px;color:var(--muted)}
+.made{text-align:center;margin:44px 0 16px}
+.made .k{color:var(--gold-d)}
+.made h2{font-size:clamp(30px,6.4vw,38px);margin-top:8px}
+.route{position:relative;background:var(--paper);border:1px solid var(--gold);padding:26px 22px;box-shadow:0 30px 60px -44px rgba(15,28,45,.6)}
+.route .k{display:inline-block;background:var(--gold-l);color:var(--gold-d);padding:5px 10px}
+.route h3{font-size:30px;margin:12px 0 8px}
+.route p{color:var(--muted);margin:0 0 18px}
+.route .btns{display:grid;gap:10px}
+.sec{margin-top:50px}
+.sec .k{text-align:center}
+.sec h2{font-size:clamp(28px,6vw,34px);text-align:center;margin:8px 0 20px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.vs div{padding:20px 18px;font-size:14.5px}
+.vs .now{background:var(--paper)}
+.vs .then{background:#f5eddf}
+.vs h4{margin:0 0 10px;font:700 11px var(--sans);letter-spacing:.2em;text-transform:uppercase}
+.vs .now h4{color:var(--muted)}.vs .then h4{color:var(--gold-d)}
+.vs ul{margin:0;padding-left:18px}
+.vs li{margin:7px 0}
+.how{display:grid;gap:0;border-top:1px solid var(--line)}
+.how > div{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:20px 0;border-bottom:1px solid var(--line)}
+.how .n{font-family:var(--serif);font-size:44px;line-height:.9;color:var(--gold)}
+.how small{font:700 10.5px var(--sans);letter-spacing:.2em;color:var(--muted)}
+.how h3{font-size:24px;margin:2px 0 4px}
+.how p{margin:0;font-size:14.5px;color:var(--muted)}
+.days{display:grid;gap:10px}
+.day{background:var(--paper);border:1px solid var(--line);padding:20px}
+.day.done{border-color:var(--gold);background:#fbf5ea}
+.day small{font:700 10.5px var(--sans);letter-spacing:.2em;color:var(--gold-d);text-transform:uppercase}
+.day h3{font-size:23px;margin:4px 0 8px}
+.day p{margin:0 0 10px;font-size:15px}
+.day .ask{color:var(--muted);font-style:italic}
+.day label{display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-d);cursor:pointer}
+.day input{accent-color:var(--gold);width:17px;height:17px}
+details{background:var(--paper);border-bottom:1px solid var(--line)}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{padding:20px 4px;font:600 21px var(--serif);cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--gold);font:400 26px/1 var(--sans)}
+details[open] summary::after{content:"−"}
+details p{margin:0;padding:0 4px 18px;color:var(--muted);font-size:15px}
+
+@media (max-width:620px){
+  .side{grid-template-columns:1fr}
+  .side figure{max-width:280px}
+  .pillars{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  .scale{grid-template-columns:1fr 1fr}
+  .pcard .top{grid-template-columns:1fr 64px 52px}
+  .vs{grid-template-columns:1fr}
+  .hero::before{inset:10px -8px -10px 10px}
+  .by .sep{display:none}
+}
+
+/* ===== блоки статьи по образцу ===== */
+.trust{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted);padding:12px 0 0}
+.trust .dots{color:var(--gold);letter-spacing:3px;font-size:12px}
+.trust b{color:var(--ink)}
+figure.wide{margin:30px 0 30px}
+figure.wide img{width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--line)}
+figure.wide.sq img{aspect-ratio:1/1;max-width:520px;margin:0 auto}
+figure figcaption{font:italic 15px/1.4 var(--serif);color:var(--muted);margin-top:10px;text-align:center}
+.diagram{margin:34px 0}
+.d-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gold);border:1px solid var(--gold)}
+.d-grid div{background:var(--paper);padding:28px 18px;text-align:center}
+.d-grid span{display:block;font-family:var(--serif);font-size:30px;color:var(--gold);line-height:1}
+.d-grid b{display:block;font-family:var(--serif);font-size:24px;font-weight:600;margin-top:6px}
+.d-grid small{color:var(--muted);font-size:13px}
+.d-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--ink);color:#f3ead9;font:italic 600 18px var(--serif);padding:12px 18px;border:1px solid var(--gold)}
+.qs{list-style:none;padding:0;margin:0 0 22px}
+.qs li{font:italic 22px/1.35 var(--serif);padding:12px 0 12px 22px;border-left:2px solid var(--gold);margin:8px 0;background:linear-gradient(90deg,#fbf5ea,transparent)}
+.profiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:20px 0 24px}
+.profiles div{background:var(--paper);padding:20px}
+.profiles b{display:block;font:600 22px/1.2 var(--serif);margin-bottom:6px}
+.profiles span{font-size:14.5px;color:var(--muted)}
+.note-light{display:block;margin-top:14px;font-size:12px;color:#a49d8f}
+.important{border:1px solid var(--gold);background:#fbf5ea;padding:16px 18px;margin:22px 0;font-size:15px}
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 40px}
+.badges div{text-align:center;font:600 12px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);border:1px solid var(--line);padding:18px 8px}
+.badges span{display:block;color:var(--gold);font-size:14px;margin-bottom:8px}
+.art h2.h-sm{font-size:30px}
+.offer2{text-align:center;margin:34px 0}
+.offer2 p{font-size:16px;margin-bottom:14px}
+.numbers{background:var(--paper);border:1px solid var(--line);padding:24px 22px;margin:40px 0}
+.numbers .k{margin-bottom:12px}
+.nrow{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;border-top:1px solid var(--line)}
+.nrow span{color:var(--muted);font-size:15px}
+.nrow b{font:600 30px/1 var(--serif);font-variant-numeric:tabular-nums}
+.disc{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px;margin-top:30px}
+.disc b{color:var(--ink);letter-spacing:.06em}
+.disc p{margin:8px 0 0!important}
+@media (max-width:620px){.profiles{grid-template-columns:1fr}.badges{grid-template-columns:1fr 1fr}.d-core{font-size:15px;padding:8px 12px}}
+
+
+.cnum{color:var(--muted);font-weight:500}
+.reviews{display:grid;gap:12px;margin-top:18px}
+.rv{background:var(--paper);border:1px solid var(--line);padding:20px}
+.rv-h{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.av{width:42px;height:42px;border-radius:50%;background:var(--ink);color:var(--gold);display:grid;place-items:center;font:600 20px var(--serif);flex:none}
+.rv-h b{display:block;font-weight:600}
+.rv-h small{color:var(--muted);font-size:13px}
+.rv p{font:italic 20px/1.4 var(--serif);margin:0 0 12px!important}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d);background:#fbf5ea;border:1px solid var(--gold-l);padding:6px 10px}
+.more{display:block;width:100%;margin-top:12px;background:none;border:1px solid var(--ink);padding:15px;font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;color:var(--ink)}
+.more:hover{background:var(--ink);color:#f3ead9}
+
+
+.gift{text-align:center;padding-top:40px}
+.gift h2{font-size:clamp(32px,7vw,42px);margin:8px 0 10px}
+.gift .lede{color:var(--muted);margin:0 0 28px}
+.giftbox{display:block;width:100%;max-width:360px;margin:0 auto;background:var(--paper);border:1px dashed var(--gold);padding:26px 18px;cursor:pointer;font-family:var(--sans);color:var(--ink)}
+.giftbox:hover{background:#fbf5ea}
+.giftbox .gi{display:block;width:44px;height:44px;margin:0 auto 12px;border-radius:50%;background:var(--ink);color:var(--gold);line-height:44px;font-size:16px}
+.giftbox b{display:block;font:600 22px var(--serif)}
+.giftbox small{color:var(--muted)}
+.giftcode{position:relative;display:inline-block;background:var(--ink);color:#f3ead9;padding:20px 30px;margin-top:6px}
+.giftcode::before{content:"";position:absolute;inset:6px;border:1px solid rgba(176,141,87,.5)}
+.giftcode small{display:block;font:600 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.giftcode b{font:600 22px var(--serif)}
+.applied{display:inline-block;margin-top:12px;background:#f3e9da;border:1px solid var(--gold-l);padding:8px 14px;font-size:14px}
+.plans{display:grid;gap:12px;margin:18px 0 14px}
+.planopt{position:relative;display:grid;gap:8px;text-align:left;background:var(--paper);border:1px solid var(--line);padding:22px 18px 18px;cursor:pointer;font-family:var(--sans);color:var(--ink);width:100%}
+.planopt.on{border:2px solid var(--gold);background:#fbf5ea;padding:21px 17px 17px}
+.ptag{position:absolute;top:-11px;left:16px;background:var(--ink);color:var(--gold);font:700 10px var(--sans);letter-spacing:.16em;text-transform:uppercase;padding:5px 10px}
+.pr{display:flex;gap:12px;align-items:center}
+.radio{width:20px;height:20px;border-radius:50%;border:1px solid #b9ad98;flex:none}
+.planopt.on .radio{border-color:var(--gold);background:var(--gold);box-shadow:inset 0 0 0 4px #fbf5ea}
+.pr b{display:block;font:600 21px/1.2 var(--serif)}
+.pr small{color:var(--muted);font-size:13px}
+.pd{font-size:14.5px;color:#3d3a35;padding-left:32px}
+.pp{padding-left:32px;font:700 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-d)}
+.secure{text-align:center;font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.summary{background:var(--paper);border:1px solid var(--line);padding:22px 20px;margin-top:40px}
+.summary .k{margin-bottom:10px}
+.srow{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:15px}
+.srow b{font-weight:600}
+.summary .btn{margin-top:14px}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ======================= 1. СТАТЬЯ ======================= -->
+<div id="article">
+<header class="masthead"><div class="in">
+  <a class="logo" href="#"><svg class="mark" viewBox="0 0 26 26" aria-hidden="true"><path d="M7 3h12l5 7-11 13L2 10z" fill="none" stroke="#b08d57" stroke-width="1.3"/><path d="M2 10h22M10 10l3-7 3 7M7 3l6 20M19 3l-6 20" fill="none" stroke="#b08d57" stroke-width=".8" opacity=".8"/></svg><span><b>Diamond Generation</b><small>Метод «4 Опоры» · Лена Аронов</small></span></a>
+</div></header>
+
+<main class="art">
+  <h1>В 2013 году Лена Аронов потеряла почти всё. <em>То, что помогло ей подняться, сегодня возвращает силы руководителям</em></h1>
+  <p class="sub"><mark>Как из самого тяжёлого года её жизни родился метод «4 Опоры»</mark> и почему с ним приходят собственники и руководители компаний</p>
+
+  <div class="by"><img src="img-4opory/lena-face.jpg" alt=""><span><b>Лена Аронов</b><br>Neuroscience-coach, основатель Diamond Generation</span></div>
+  <div class="trust"><span class="dots" aria-hidden="true">◆◆◆◆◆</span><span>Программы Лены прошли <b>более 2000</b> человек</span></div>
+
+  <figure class="wide"><img src="img-4opory/lena-wide.jpg" alt="Лена Аронов"><figcaption>Лена Аронов, автор метода «4 Опоры»</figcaption></figure>
+
+  <p class="lead">Лена Аронов всегда доверяла тому, что можно измерить и проверить.</p>
+  <p>За плечами — психология и докторская степень в нейронауке, научная работа в Алматы под руководством профессора Г. А. Усманова. Потом Фонд Сороса, где она отвечала за Центральную Азию. Собственная консалтинговая компания в США. И девять лет на посту регионального директора Института Адизеса, рядом с самим Ицхаком Адизесом.</p>
+  <p>Модели, цифры, управленческие системы — её привычный язык.</p>
+  <p>Среди её клиентов — собственники бизнеса, топ-менеджеры, государственные структуры. Люди, которые привыкли решать любые задачи головой.</p>
+  <p>И у многих из них Лена видела одно и то же.</p>
+  <p>Стратегия продумана, команда собрана, деньги есть. А сил нет. Отпуск не помогает. Сон не восстанавливает. В три часа ночи мысли идут по кругу.</p>
+  <p>Тогда она ещё не знала, что очень скоро окажется на их месте.</p>
+
+  <div class="pull">В 2013 году всё рухнуло разом</div>
+
+  <p>Банкротство и личный долг в два миллиона долларов. Потеря четырёх близких людей. Тяжёлый диагноз.</p>
+  <p class="b">И всё это почти одновременно.</p>
+  <p>Методик Лена знала немало: психология, нейронаука, управленческие инструменты. Но каждая работала только с чем-то одним. Одна — с телом, другая — с мыслями, третья — с целями.</p>
+  <p>А рушилось всё сразу.</p>
+  <p>И Лена стала собирать себя заново. Она опиралась на всё, что знала: психологию, нейронауку, философию, методологию Адизеса и древнюю мудрость.</p>
+  <p>Шаг за шагом.</p>
+
+  <figure class="wide"><img src="img-4opory/lena2-wide.jpg" alt="Лена Аронов"><figcaption>Лена Аронов</figcaption></figure>
+
+  <h2>Всё держится на четырёх опорах</h2>
+  <p>Тело. Ясная голова. Смысл. Близкие люди.</p>
+  <p>Лена поняла: человек держится на четырёх опорах. И чинить их по отдельности бесполезно.</p>
+  <p>Когда одна опора слабеет, её нагрузку берут на себя остальные. Какое-то время этого никто не замечает. Человек работает, принимает решения, держится. А потом вдруг уходят сон, радость, желание что-либо делать.</p>
+  <p class="b">Хотя со стороны всё в порядке.</p>
+  <p>Так из личного опыта вырос метод «4 Опоры». Историю Лены опубликовал доктор Джо Диспенза.</p>
+
+  <figure class="diagram">
+    <div class="d-grid">
+      <div><span>I</span><b>Физическая</b><small>сон, энергия, тело</small></div>
+      <div><span>II</span><b>Ментальная</b><small>ясность, фокус</small></div>
+      <div><span>III</span><b>Духовная</b><small>смысл, ценности</small></div>
+      <div><span>IV</span><b>Социальная</b><small>близкие люди</small></div>
+      <i class="d-core">Человек</i>
+    </div>
+    <figcaption>Четыре опоры метода</figcaption>
+  </figure>
+
+  <div class="pull">Не нужно чинить всё сразу</div>
+  <p>Представьте стол на четырёх ножках. Если одна короче остальных, шатается весь стол. Можно подкладывать салфетки, переставлять вещи, укреплять столешницу.</p>
+  <p>А можно найти ту самую ножку.</p>
+  <p>Метод Лены не пытается переделать человека целиком. Сначала он показывает, какая из четырёх опор проседает первой. С неё и начинается работа.</p>
+  <p class="b">Когда эта опора выравнивается, остальным становится легче.</p>
+
+  <figure class="wide sq"><img src="img-4opory/lena-sq.jpg" alt="Лена Аронов"></figure>
+
+  <h2>Как помочь тем, у кого нет времени</h2>
+  <p>Перед Леной встал вопрос.</p>
+  <p>У её клиентов нет месяца на ретрит и нет лишнего часа в неделю. Между встречами у них пятнадцать минут.</p>
+  <p>Как передать им то, что она сама собирала годами?</p>
+  <p>Лена начала с вопросов. Простых, но точных. За несколько минут они показывают, где у человека проседает опора:</p>
+  <ul class="qs">
+    <li>Как вы просыпаетесь?</li>
+    <li>Кому вы можете позвонить в три часа ночи и сказать: «Мне плохо»?</li>
+    <li>Если завтра всё, чего вы достигли, исчезнет, что у вас останется?</li>
+  </ul>
+  <p>Для таких вопросов не нужны годы практики. Нужны только честные ответы.</p>
+  <p>Так и строится её работа: сначала увидеть, какая опора слабее остальных, затем понять, с чего начать.</p>
+
+  <h2>Почему начинать нужно с одной опоры</h2>
+  <p>Лене часто задают этот вопрос. Кажется логичным браться за всё сразу: и за сон, и за стресс, и за отношения.</p>
+  <p>Но так не получается. Если тело на пределе — сон по четыре часа, постоянное напряжение, — никакая работа с мыслями не закрепится. Голове не до нового: все силы уходят на то, чтобы держаться.</p>
+  <p>Если опереться не на кого, даже самая продуманная стратегия держится на одном человеке. И этот человек выдыхается.</p>
+  <p class="b">Поэтому метод начинается с тела, а дальше идёт туда, где слабее всего именно у вас.</p>
+
+  <div class="facts">
+    <div><strong>PhD</strong><span>в нейронауке</span></div>
+    <div><strong>9 лет</strong><span>в Институте Адизеса</span></div>
+    <div><strong>2000+</strong><span>человек прошли программы</span></div>
+    <div><strong>1800+</strong><span>часов индивидуальной работы</span></div>
+  </div>
+
+  <h2>Четыре профиля</h2>
+  <p>Из этой работы выросли четыре профиля. Каждый описывает человека, у которого первой проседает одна из опор.</p>
+  <div class="profiles">
+    <div><b>«Вечный двигатель»</b><span>Проседает физическая опора. Держится на одной силе воли: «Отдохну потом, сейчас надо дожать».</span></div>
+    <div><b>«Стратег без тишины»</b><span>Проседает ментальная опора. Голова не отключается даже в отпуске и продолжает просчитывать риски.</span></div>
+    <div><b>«Успех без вкуса»</b><span>Проседает духовная опора. Цели достигнуты, а радости всё меньше.</span></div>
+    <div><b>«Опора для всех»</b><span>Проседает социальная опора. На него опираются все, а ему опереться не на кого.</span></div>
+  </div>
+  <p>Каждый из этих сценариев когда-то помогал справляться. Сегодня каждый из них незаметно забирает силы.</p>
+  <p>Свой подход Лена называет нейрокоучингом — на стыке нейронауки и древней мудрости.</p>
+
+  <figure class="wide"><img src="img-4opory/lena-wide.jpg" alt="Лена Аронов" style="object-position:50% 70%"></figure>
+
+  <h2>Так появился тест «4 Опоры»</h2>
+  <p>Лена не может встретиться с каждым лично. Поэтому она собрала свои вопросы в короткий тест.</p>
+  <p>Тест показывает, какая из четырёх опор проседает у вас сейчас. На него уйдёт около четырёх минут.</p>
+  <p>Сразу после теста вы получите свой профиль и план на 7 дней: по одной короткой практике для каждой опоры, а затем — для всех четырёх вместе. От пяти до двадцати минут в день, время вы выбираете сами.</p>
+  <p>Не нужно бороться с собой и перекраивать всю жизнь. Достаточно увидеть, на чём вы держитесь, и начать там, где тоньше всего.</p>
+
+  <div class="pull">Тест, который покажет, на чём вы держитесь</div>
+  <p>Тест «4 Опоры» займёт около четырёх минут.</p>
+  <p>В нём нет вопросов про любимый цвет или поведение на вечеринках.</p>
+  <p>Это те же вопросы, которые Лена задаёт своим клиентам: про сон, мысли, смысл и близких людей.</p>
+  <p>Тест не ставит диагнозов. Он помогает назвать то, что вы, возможно, давно чувствуете, но не могли сформулировать.</p>
+  <p class="b">Чтобы укрепить опору, сначала нужно понять, какая из них проседает.</p>
+
+  <div class="offer">
+    <span class="k">Тест Лены Аронов</span>
+    <h3>Узнайте, какая опора держит вашу жизнь, а какая проседает</h3>
+    <p>Программы Лены уже прошли более 2000 человек</p>
+    <a class="btn" href="#test">Пройти тест бесплатно</a>
+    <small class="note-light">Результаты у всех разные</small>
+  </div>
+
+  <p class="important"><b>Важно:</b> тест бесплатный. Профиль и план на 7 дней вы получите сразу после него.</p>
+
+  <div class="badges">
+    <div><span>◆</span>Бесплатно</div>
+    <div><span>◆</span>4 минуты</div>
+    <div><span>◆</span>План на 7 дней</div>
+    <div><span>◆</span>Данные защищены</div>
+  </div>
+
+  <h2 class="h-sm">Отзывы клиентов <span class="cnum">(3)</span></h2>
+  <div class="reviews" id="reviews">
+    <div class="rv"><div class="rv-h"><span class="av">Е</span><span><b>Елена, 42 года</b><small>Основатель компании, 50 сотрудников</small></span></div>
+      <p>«Я семь лет была узким местом собственной компании и называла это ответственностью».</p>
+      <div class="tags"><span>Делегировано 70% задач</span><span>Доход вырос вдвое</span></div></div>
+    <div class="rv"><div class="rv-h"><span class="av">В</span><span><b>Виктор, 38 лет</b><small>Собственник B2B-компании</small></span></div>
+      <p>«Чек в закрытых сделках вырос в 5–10 раз при том же количестве встреч. Я просто перестал терять главное в разговоре».</p>
+      <div class="tags"><span>Конверсия сделок × 5–10</span><span>Операционка передана команде</span></div></div>
+    <div class="rv" hidden id="rv3"><div class="rv-h"><span class="av">А</span><span><b>Андрей, 45 лет</b><small>CEO холдинга</small></span></div>
+      <p>«Через три недели я впервые за два года проснулся раньше будильника. Это мелочь, но она изменила всё остальное».</p>
+      <div class="tags"><span>Восстановился сон</span><span>Вернулись стратегические сессии</span></div></div>
+  </div>
+  <button class="more" id="moreRv" type="button">Показать ещё отзывы</button>
+  <p class="small" style="margin-top:10px">Истории клиентов Лены Аронов с сайта diamondgeneration.store. Результаты у всех разные.</p>
+
+  <div class="offer2">
+    <p class="lim"><b>Начните сегодня:</b> тест и план на 7 дней бесплатно</p>
+    <a class="btn gold wide" href="#test">Пройти тест «4 Опоры»</a>
+  </div>
+
+  <div class="numbers">
+    <div class="k">Лена Аронов в цифрах</div>
+    <div class="nrow"><span>Лет опыта в психологии и консалтинге</span><b>30+</b></div>
+    <div class="nrow"><span>Человек прошли программы</span><b>2000+</b></div>
+    <div class="nrow"><span>Часов индивидуальной работы</span><b>1800+</b></div>
+    <div class="nrow"><span>Лет региональным директором Института Адизеса</span><b>9</b></div>
+    <div class="nrow"><span>Опоры, на которых держится человек</span><b>4</b></div>
+  </div>
+
+  <div class="disc">
+    <b>Важно о здоровье</b>
+    <p>Информация на этой странице не является медицинской консультацией и не заменяет обращения к специалисту.</p>
+    <p>Если вас беспокоит здоровье, обратитесь к врачу. Не откладывайте лечение из-за того, что прочитали здесь или по ссылкам с этой страницы. В экстренной ситуации сразу звоните врачу или в службу экстренной помощи.</p>
+  </div>
+  <p class="foot">© Diamond Generation · Лена Аронов, neuroscience-coach</p>
+</main>
+</div>
+
+<!-- ======================= 2. ТЕСТ ======================= -->
+<div id="app" hidden>
+  <div class="bar-top">
+    <span id="backslot"></span>
+    <a class="logo" href="#" aria-label="Diamond Generation, к статье"><svg class="mark" viewBox="0 0 26 26" aria-hidden="true"><path d="M7 3h12l5 7-11 13L2 10z" fill="none" stroke="#b08d57" stroke-width="1.4"/><path d="M2 10h22M10 10l3-7 3 7" fill="none" stroke="#b08d57" stroke-width=".9"/></svg><b>4 Опоры</b></a>
+    <span class="cnt" id="cnt"></span>
+  </div>
+  <div class="prog" id="progwrap"><i id="prog" style="width:0"></i></div>
+  <main class="screen" id="screen" aria-live="polite"></main>
+  <div class="dock" id="dock" hidden><div class="in" id="dockin"></div></div>
+</div>
+
+<script>
+/* ===== Настройки ===== */
+const BOOKING_URL   = "https://ig.me/m/lena.aronovv";
+const EMAIL         = "diamond.generation108@gmail.com";
+const PROGRAM_URL   = "https://diamondgeneration.store/#formats";
+const LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbztuY4Z1P0gkXeQoGLXmIzr4To2bc5Z1tnZQiN4PHSiYmtXjhz0vGEOTQz7ypV84BsX/exec";  // адрес Google Apps Script для сохранения имени, почты и ответов. Пусто = не отправляем.
+
+const P = {
+  phys:{name:"Физическая", short:"Тело и энергия", profile:"«Вечный двигатель»", voice:"«Отдохну потом, сейчас надо дожать».",
+    plan:"Вернуть телу восстановление: сон, дыхание, движение",
+    practice:"Сядьте, стопы на пол. Медленно пройдите вниманием от макушки до стоп и отметьте три места, где есть напряжение. На каждом сделайте три спокойных выдоха, длиннее вдоха. Ничего не исправляйте, просто заметьте."},
+  ment:{name:"Ментальная", short:"Ясность и фокус", profile:"«Стратег без тишины»", voice:"«А что, если я что-то упустил?»",
+    plan:"Научиться замечать круг мыслей и выходить из него",
+    practice:"Вечером выпишите на бумагу всё, что крутится в голове, без редактуры. Потом напротив каждого пункта поставьте одну букву: Д — сделаю, П — передам, О — отпускаю. Закройте лист."},
+  spir:{name:"Духовная", short:"Смысл и ценности", profile:"«Успех без вкуса»", voice:"«Ну достиг. И что дальше?»",
+    plan:"Вернуть связь с тем, ради чего вы всё это строите",
+    practice:"Вспомните один момент за последний год, когда вы чувствовали: «вот ради этого». Запишите, где вы были, с кем, что делали. Спросите себя: сколько этого есть в моей неделе сейчас?"},
+  soc:{name:"Социальная", short:"Близкие люди", profile:"«Опора для всех»", voice:"«Справлюсь сам(а), не буду никого грузить».",
+    plan:"Найти людей, рядом с которыми можно не быть сильным",
+    practice:"Напишите одному близкому человеку сообщение не про дела: «Вспомнил(а) о тебе, как ты?». Или скажите кому-то одну честную фразу о том, как вам на самом деле."}
+};
+const ORDER=["phys","ment","spir","soc"];
+const AGREE=["Не согласен","Скорее нет","Скорее да","Согласен"];
+
+const S = [
+ {b:"О вас", f:"role", t:"Ваша роль", o:["Собственник / основатель","CEO / топ-менеджер","Эксперт / частная практика","Другое"]},
+ {b:"О вас", f:"scale", t:"Сколько людей зависят от ваших решений?", o:["Больше 50","10–50","До 10","Только я и моя семья"]},
+ {b:"Что происходило", f:"events", multi:true, t:"Было ли что-то из этого за последние 2–3 года?", hint:"Можно выбрать несколько.", o:["Перегрузка на работе, выгорание","Кризис в бизнесе или с деньгами","Расставание или развод","Потеря близкого человека","Переезд или большая перемена","Проблемы со здоровьем","Ничего из этого"]},
+ {b:"Тело · физическая опора", p:"phys", t:"Как вы просыпаетесь?", o:["Отдохнувшим","Нормально, но раскачиваюсь долго","Уставшим, будто не спал(а)","Сплю урывками или просыпаюсь ночью с мыслями"]},
+ {b:"Тело · физическая опора", p:"phys", t:"Когда вы в последний раз замечали своё тело не потому, что оно болит?", o:["Сегодня: спорт, прогулка, практика","На этой неделе","Не помню","Тело даёт о себе знать только напряжением: шея, челюсть, спина"]},
+ {b:"Согласны ли вы?", p:"phys", scale:true, t:"Я устаю, даже когда сплю достаточно."},
+ {info:"loop"},
+ {b:"Голова · ментальная опора", p:"ment", t:"Как долго вы можете думать об одном, не отвлекаясь?", o:["Столько, сколько нужно","Минут 20","Пару минут, потом рука тянется к телефону","В голове постоянно несколько вкладок сразу"]},
+ {b:"Голова · ментальная опора", p:"ment", t:"Что делает ваш ум, когда дела закончены?", o:["Отдыхает","Прокручивает день, но отпускает","Планирует завтра и просчитывает риски","Прокручивает старые разговоры и мысленно спорит с людьми"]},
+ {b:"Согласны ли вы?", p:"ment", scale:true, t:"Если мысль началась, я не могу её отпустить, пока не найду ответ."},
+ {b:"Смысл · духовная опора", p:"spir", t:"Если бы завтра всё достигнутое исчезло, что бы осталось?", o:["Я и то, ради чего я живу","Думаю, что-то важное осталось бы","Не знаю","Не хочу об этом думать"]},
+ {b:"Смысл · духовная опора", p:"spir", t:"Как часто вы чувствуете, что живёте свою жизнь, а не выполняете список?", o:["Почти всегда","Часто","Редко","Давно такого не было"]},
+ {b:"Согласны ли вы?", p:"spir", scale:true, t:"Я достигаю целей, но радости от этого всё меньше."},
+ {info:"proof"},
+ {b:"Люди · социальная опора", p:"soc", t:"Кому вы можете позвонить в три часа ночи и сказать «мне плохо»?", o:["Нескольким людям","Одному человеку","Теоретически есть кому, но я не позвоню","Обычно в такие моменты звонят мне"]},
+ {b:"Люди · социальная опора", p:"soc", t:"Сколько ваших разговоров за неделю были не про дела?", o:["Много","Несколько","Один-два","Не помню таких"]},
+ {b:"Согласны ли вы?", p:"soc", scale:true, t:"Мне проще помочь другим, чем попросить о помощи."},
+ {b:"Двигаемся дальше", f:"urg", t:"Насколько вам важно вернуть себе силы и ясность?", o:["Сейчас это мой главный приоритет","Очень важно, готов(а) менять в ближайший месяц","Важно, но пока хочу разобраться"]},
+ {b:"Двигаемся дальше", f:"fmt", t:"Как вам привычнее работать над собой?", o:["Индивидуально с экспертом","В небольшой группе","Самостоятельно, в своём темпе"]},
+ {b:"Двигаемся дальше", f:"time", t:"Сколько времени в день вы готовы уделять практике?", o:["5 минут","10 минут","15 минут","20 минут"]}
+];
+const QCOUNT=S.filter(s=>!s.info).length;
+const IDX={}; S.forEach((s,k)=>{ if(s.f) IDX[s.f]=k; });
+
+let i=0, ans={}, lead=null, stage="quiz";
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const qNo=k=>S.slice(0,k+1).filter(s=>!s.info).length;
+
+function openApp(on){ $("article").hidden=on; $("app").hidden=!on; window.scrollTo(0,0); }
+function chrome(o){
+  $("cnt").innerHTML=o.count||"";
+  $("backslot").innerHTML=o.back?`<button class="backbtn" id="bk" aria-label="Назад">←</button>`:"";
+  if(o.back) $("bk").onclick=o.back;
+  $("progwrap").hidden=o.progress==null;
+  if(o.progress!=null) $("prog").style.width=o.progress+"%";
+  $("dock").hidden=!o.dock; $("dockin").innerHTML=o.dock||"";
+}
+
+function renderStep(){
+  stage="quiz";
+  const s=S[i];
+  if(s.info) return renderInfo(s.info);
+  const n=qNo(i), sel=ans[i], first=i===0;
+  let body;
+  if(s.scale){
+    body=`<div class="scale">${AGREE.map((a,k)=>`<button class="opt${sel===k?" on":""}" data-k="${k}">${a}</button>`).join("")}</div>`;
+  } else {
+    body=`<div class="opts">${s.o.map((o,k)=>{const on=s.multi?(sel||[]).includes(k):sel===k;
+      return `<button class="opt${s.multi?" multi":""}${on?" on":""}" data-k="${k}" aria-pressed="${on}">${esc(o)}</button>`;}).join("")}</div>`;
+  }
+  const inner=`<div class="block">${esc(s.b)}</div><p class="q">${esc(s.t)}</p>${s.hint?`<p class="hint">${esc(s.hint)}</p>`:""}${body}`;
+  $("screen").innerHTML=first
+    ?`<div class="start"><h1>Какая из четырёх опор проседает у вас?</h1><p class="lede">Узнайте, что забирает ваши силы, и получите личный план на 7 дней по методу Лены Аронов.</p><div class="qcard">${inner}</div><p class="legal">Продолжая, вы соглашаетесь с обработкой ответов для составления вашего плана.</p></div>`
+    :inner;
+  chrome({count:first?"":`<b>${n}</b>/${QCOUNT}`, back:first?null:prev, progress:first?null:((n-1)/QCOUNT)*100,
+    dock:s.multi?`<button class="btn wide" id="next"${(sel||[]).length?"":" disabled"}>Дальше</button>`:null});
+  $("screen").querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    const k=+b.dataset.k;
+    if(s.multi){
+      let a=ans[i]||[]; const none=s.o.length-1;
+      if(k===none) a=[none]; else { a=a.filter(x=>x!==none); a=a.includes(k)?a.filter(x=>x!==k):[...a,k]; }
+      ans[i]=a; renderStep();
+    } else { ans[i]=k; b.classList.add("on"); setTimeout(next,220); }
+  });
+  if($("next")) $("next").onclick=next;
+}
+function next(){ i++; window.scrollTo(0,0); if(i<S.length) renderStep(); else renderBuild(); }
+function prev(){ i=Math.max(0,i-1); window.scrollTo(0,0); renderStep(); }
+
+function renderInfo(kind){
+  const n=qNo(i);
+  if(kind==="loop"){
+    $("screen").innerHTML=`<div class="info">
+      <div class="block">Как это устроено</div>
+      <h2>Когда одна опора проседает, её нагрузку берут на себя остальные</h2>
+      <div class="cycle">
+        <div class="hot"><b>1</b>Одна опора проседает</div>
+        <div><b>2</b>Остальные берут её нагрузку на себя</div>
+        <div><b>4</b>Сдаёт следующая опора</div>
+        <div><b>3</b>Силы уходят быстрее, чем восстанавливаются</div>
+      </div>
+      <p class="cyclenote">И круг повторяется снова.</p>
+      <p>Со стороны всё выглядит нормально, а внутри копится усталость, которую не снимают ни отпуск, ни выходные. Поэтому важно увидеть, какая опора у вас первая. С неё и начинаем.</p></div>`;
+  } else {
+    $("screen").innerHTML=`<div class="info">
+      <div class="block">Вы не одни</div>
+      <h2>С этим приходят сильные люди, у которых со стороны всё в порядке</h2>
+      <div class="stats">
+        <div><strong>2000+</strong><span>человек прошли программы Лены</span></div>
+        <div><strong>1800+</strong><span>часов индивидуальной работы</span></div>
+      </div>
+      <div class="quote"><img src="img-4opory/lena-face.jpg" alt=""><p>Метод «4 Опоры» объединяет психологию, нейронауку, философию, методологию Адизеса и древнюю мудрость.<small>Лена Аронов, PhD в нейронауке</small></p></div>
+      <p style="margin-top:18px">Осталось несколько вопросов о четвёртой опоре — о близких людях.</p></div>`;
+  }
+  chrome({count:`<b>${n}</b>/${QCOUNT}`, back:prev, progress:(n/QCOUNT)*100, dock:`<button class="btn wide" id="next">Продолжить</button>`});
+  $("next").onclick=next;
+}
+
+function renderBuild(){
+  stage="build";
+  const steps=["Анализируем ваши ответы","Оцениваем четыре опоры","Находим ту, что проседает","Собираем план на 7 дней"];
+  $("screen").innerHTML=`<div class="build"><div class="pct" id="pct">0%</div>
+    <h2 style="font-size:26px;font-weight:800;margin-top:4px">Собираем ваш личный план</h2>
+    <p style="color:var(--muted)">Это займёт несколько секунд.</p>
+    <ul class="steps">${steps.map((s,k)=>`<li id="st${k}">${s}</li>`).join("")}</ul></div>`;
+  chrome({});
+  const fast=matchMedia("(prefers-reduced-motion: reduce)").matches; let p=0;
+  const t=setInterval(()=>{ p=Math.min(100,p+(fast?25:2)); $("pct").textContent=p+"%";
+    steps.forEach((_,k)=>{ if(p>=(k+1)*25) $("st"+k).classList.add("ok"); });
+    if(p>=100){ clearInterval(t); setTimeout(renderGate,500); } }, fast?150:70);
+}
+
+function renderGate(){
+  stage="gate";
+  $("screen").innerHTML=`<form class="gate" id="gform" novalidate>
+    <div class="block" style="text-align:center">Ваш результат готов</div>
+    <h2>Куда отправить ваш результат и план на 7 дней?</h2>
+    <p class="lede">Укажите имя и почту, чтобы увидеть результат и сохранить план.</p>
+    <label class="f" for="gname">Имя</label><input type="text" id="gname" autocomplete="given-name">
+    <label class="f" for="gmail">Почта</label><input type="email" id="gmail" autocomplete="email" placeholder="name@mail.com">
+    <label class="chk" for="gok"><input type="checkbox" id="gok"> Я согласен(на) на обработку персональных данных и получение писем от Diamond Generation.</label>
+    <div class="err" id="gerr"></div>
+    <div class="lock">Ваши данные видит только команда Diamond Generation.</div>
+  </form>`;
+  chrome({dock:`<div class="err" id="gerr2" style="margin:0 0 8px"></div><button class="btn wide" type="button" id="gsend">Показать мой результат</button>`});
+  const submit=()=>{
+    const name=$("gname").value.trim(), mail=$("gmail").value.trim();
+    const say=m=>{ $("gerr").textContent=m; $("gerr2").textContent=m; };
+    if(!name) return say("Напишите, как к вам обращаться.");
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) return say("Проверьте почту: похоже, в адресе ошибка.");
+    if(!$("gok").checked) return say("Отметьте галочку согласия на обработку данных.");
+    lead={name,mail}; sendLead(); renderResult();
+  };
+  $("gsend").onclick=submit;
+  $("gform").onsubmit=e=>{ e.preventDefault(); submit(); };
+  $("gform").addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); submit(); } });
+}
+function sendLead(){
+  if(!LEAD_ENDPOINT) return;
+  const s=score(), w=weakest(s), f=filters();
+  const payload={name:lead.name,email:lead.mail,profile:P[w].name,scores:s,
+    role:S[IDX.role].o[f.role],scale:S[IDX.scale].o[f.scale],events:(ans[IDX.events]||[]).map(k=>S[IDX.events].o[k]).join(", "),
+    urgency:S[IDX.urg].o[f.urg],format:S[IDX.fmt].o[f.fmt],time:S[IDX.time].o[f.time],route:route()};
+  try{ fetch(LEAD_ENDPOINT,{method:"POST",mode:"no-cors",body:JSON.stringify(payload)}).catch(()=>{}); }catch(e){}
+}
+
+function score(){ const s={phys:0,ment:0,spir:0,soc:0}; S.forEach((q,k)=>{ if(q.p&&ans[k]!=null) s[q.p]+=ans[k]; }); return s; }
+const pct=v=>Math.round(20+v/9*75);
+function weakest(s){ return ORDER.reduce((w,p)=>s[p]>s[w]?p:w, ORDER[0]); }
+function filters(){ const f={}; S.forEach((q,k)=>{ if(q.f&&!q.multi) f[q.f]=ans[k]; }); return f; }
+function route(){ const f=filters(), leader=f.role<=1, ready=f.urg<=1;
+  if((leader&&ready&&f.fmt===0)||f.scale===0) return 1; if(ready&&f.fmt>=1) return 2; return 3; }
+function level(s){ const t=ORDER.reduce((a,k)=>a+s[k],0); if(t>=24) return [4,"Высокая"]; if(t>=17) return [3,"Выше средней"]; if(t>=10) return [2,"Средняя"]; return [1,"Низкая"]; }
+const chipOf=v=> v>=6?["ПРОСЕДАЕТ",""]: v>=3?["НАГРУЖЕНА","mid"]:["ДЕРЖИТ","ok"];
+
+function renderResult(){
+  stage="result";
+  const s=score(), w=weakest(s), p=P[w], f=filters(), [lv,lvName]=level(s);
+  const ev=(ans[IDX.events]||[]).filter(k=>k!==S[IDX.events].o.length-1).map(k=>S[IDX.events].o[k]);
+  $("screen").innerHTML=`<div class="res">
+    <div class="block">Ваш результат</div>
+    <h1>${lead?esc(lead.name)+", ваш":"Ваш"} профиль по четырём опорам</h1>
+    <div class="dark">
+      <div class="row"><span>Общая нагрузка на опоры</span><span class="lvl" style="color:${lv>=3?"#ff8a7a":"#e2b04a"}">${lvName}</span></div>
+      <div class="seg">${[1,2,3,4].map(k=>`<i class="${k<=lv?"on"+k:""}"></i>`).join("")}</div>
+      <p>Сильнее всего проседает <b>${p.name.toLowerCase()} опора</b>. Её нагрузку сейчас несут остальные три. Хорошая новость: это можно выровнять, и начинать нужно именно с неё.</p>
+    </div>
+    <div class="voice"><div class="k">Ваш профиль · ${esc(p.profile)}</div><b>${esc(p.voice)}</b></div>
+    <div class="table">
+      <div><span>Проседает</span><b>${p.name} опора: ${p.short.toLowerCase()}</b></div>
+      <div><span>Ваша роль</span><b>${esc(S[IDX.role].o[f.role])}</b></div>
+      <div><span>Что было за 2–3 года</span><b>${esc(ev.length?ev.join(" · "):"Ничего из списка")}</b></div>
+      <div><span>Время на практику</span><b>${esc(S[IDX.time].o[f.time])} в день</b></div>
+    </div>
+  </div>`;
+  chrome({dock:`<button class="btn wide" id="toplan">Смотреть мой план</button>`});
+  $("toplan").onclick=renderPlan;
+  store("dg_profile",w);
+  window.scrollTo(0,0);
+}
+
+function renderPlan(){ renderGift(); }
+
+/* ---- экран-подарок (как «сюрприз» в образце) ---- */
+function renderGift(){
+  stage="gift";
+  $("screen").innerHTML=`<div class="gift">
+    <div class="block" style="text-align:center">Ваш план готов</div>
+    <h2>Для вас есть подарок</h2>
+    <p class="lede">Небольшая благодарность за то, что прошли тест.</p>
+    <button class="giftbox" id="giftbox" type="button"><span class="gi">◆</span><b>Нажмите, чтобы открыть подарок</b><small>Он уже ждёт вас</small></button>
+  </div>`;
+  chrome({dock:`<button class="btn wide" id="gnext" disabled>Сначала откройте подарок</button>`});
+  $("giftbox").onclick=()=>{
+    $("screen").innerHTML=`<div class="gift open">
+      <div class="block" style="text-align:center">Сюрприз</div>
+      <h2>Личный план на 7 дней — бесплатно</h2>
+      <p class="lede">Практики подобраны под вашу опору и уже добавлены в ваш план.</p>
+      <div class="giftcode"><small>Ваш подарок</small><b>✓ План «Моя опора» · 7 дней</b></div>
+    </div>`;
+    chrome({dock:`<button class="btn wide" id="gnext">Смотреть мой план</button>`});
+    $("gnext").onclick=renderOffer;
+  };
+}
+
+/* ---- страница плана (как страница оформления в образце, без цен) ---- */
+let choice=1;
+function renderOffer(){
+  stage="offer";
+  const s=score(), w=weakest(s), p=P[w], f=filters(), r=route();
+  const mins=S[IDX.time].o[f.time]||"10 минут";
+  choice = r===1?2 : r===2?1 : 0;
+  const sorted=[...ORDER].sort((a,b)=>s[b]-s[a]);
+  const OPTS=[
+    {tag:"", name:"План «Моя опора» на 7 дней", sub:`Подарок · по ${mins.toLowerCase()} в день`, desc:"Семь коротких практик: по одной на каждую опору, затем все четыре вместе.", price:"Бесплатно"},
+    {tag:"Самый популярный", name:"Программа «4 Опоры»", sub:"Группа · с сопровождением", desc:"Пошаговая работа со всеми четырьмя опорами в своём темпе.", price:"Форматы и даты на сайте"},
+    {tag:"Лучший результат", name:"Индивидуальная работа с Леной", sub:"Лично · начинается с диагностики", desc:"Лена разбирает ваш профиль и составляет план работы.", price:"Запись в директ"}
+  ];
+  const opts=(id)=>`<div class="plans" id="${id}">${OPTS.map((o,k)=>`
+      <button type="button" class="planopt${k===choice?" on":""}" data-k="${k}">
+        ${o.tag?`<span class="ptag">${o.tag}</span>`:""}
+        <span class="pr"><span class="radio"></span><span><b>${o.name}</b><small>${o.sub}</small></span></span>
+        <span class="pd">${o.desc}</span><span class="pp">${o.price}</span>
+      </button>`).join("")}</div>
+      <button class="btn gold wide go" type="button">Получить мой план</button>
+      <p class="secure">◆ Ваши данные под защитой и не передаются третьим лицам</p>`;
+  $("screen").innerHTML=`<div class="plan">
+    <h1>${lead?esc(lead.name)+", ваши":"Ваши"} опоры работают с перегрузкой. Пора вернуть им силу.</h1>
+    ${sorted.map(k=>{const [c,cls]=chipOf(s[k]);return `<div class="pcard"><div class="top">
+        <div><span class="chip ${cls}">${c}</span><h3>${P[k].name}: ${P[k].short.toLowerCase()}</h3></div>
+        <div class="meter"><i class="${cls}" style="width:${pct(s[k])}%"></i></div><div class="num">${pct(s[k])}%</div></div>
+        <div class="way">→ <b>Ваш план:</b> ${P[k].plan}</div></div>`;}).join("")}
+    <div class="good"><h3>Хорошая новость: это можно выровнять*</h3><p>План показывает, что делать, по ${esc(mins.toLowerCase())} в день. Разбираться в одиночку не придётся.</p></div>
+    <p class="small">*Результаты зависят от вашего времени и усилий. Это не медицинская помощь.</p>
+
+    <div class="made"><div class="k">Собрано для вас</div><h2>Ваш личный план «4 Опоры» готов</h2>
+      <div class="applied">Подарок добавлен: <b>план на 7 дней</b></div></div>
+    ${opts("plans1")}
+
+    <div class="sec"><div class="k">Что может измениться</div><h2>Что может измениться за 4 недели*</h2>
+      <div class="vs">
+        <div class="now"><h4>Сейчас</h4><ul><li>Мысли ходят по кругу</li><li>Сон не восстанавливает</li><li>Мелочи выбивают из колеи</li><li>Усталость без понятной причины</li></ul></div>
+        <div class="then"><h4>С вашим планом</h4><ul><li>Замечаете круг мыслей и выходите из него</li><li>Легче засыпать и просыпаться</li><li>Спокойнее, когда что-то идёт не так</li><li>Больше сил на то, что важно</li></ul></div>
+      </div></div>
+
+    <div class="sec"><div class="k">Как это работает</div><h2>Ваш путь по четырём опорам*</h2>
+      <div class="how">
+        <div><span class="n">1</span><div><small>НЕДЕЛЯ 1</small><h3>Увидеть себя</h3><p>Понять, что отнимает силы, что их возвращает и какая опора требует внимания первой.</p></div></div>
+        <div><span class="n">2</span><div><small>НЕДЕЛИ 2–3</small><h3>Укрепить опоры</h3><p>Короткие ежедневные практики для тела, головы, смысла и отношений с близкими.</p></div></div>
+        <div><span class="n">3</span><div><small>НЕДЕЛЯ 4+</small><h3>Обрести устойчивость</h3><p>Больше энергии и ясности, больше времени для людей и дел, которые вы любите.</p></div></div>
+      </div>
+      <p class="small">*Результаты зависят от вашего времени и усилий.</p></div>
+
+    <div class="sec"><div class="k">Истории клиентов</div><h2>Что говорят клиенты Лены</h2>
+      <div class="reviews">
+        <div class="rv"><div class="rv-h"><span class="av">Е</span><span><b>Елена, 42 года</b><small>Основатель компании, 50 сотрудников</small></span></div><p>«Я семь лет была узким местом собственной компании и называла это ответственностью».</p></div>
+        <div class="rv"><div class="rv-h"><span class="av">В</span><span><b>Виктор, 38 лет</b><small>Собственник B2B-компании</small></span></div><p>«Чек в закрытых сделках вырос в 5–10 раз при том же количестве встреч. Я просто перестал терять главное в разговоре».</p></div>
+        <div class="rv"><div class="rv-h"><span class="av">А</span><span><b>Андрей, 45 лет</b><small>CEO холдинга</small></span></div><p>«Через три недели я впервые за два года проснулся раньше будильника. Это мелочь, но она изменила всё остальное».</p></div>
+      </div></div>
+
+    <div class="made"><div class="k">Собрано для вас</div><h2>Ваш личный план «4 Опоры» готов</h2>
+      <div class="applied">Подарок добавлен: <b>план на 7 дней</b></div></div>
+    ${opts("plans2")}
+
+    <div class="sec"><div class="k">Вопросы</div><h2>Частые вопросы</h2>
+      <details><summary>Что такое метод «4 Опоры»?</summary><p>Метод Лены Аронов, neuroscience-coach с PhD в нейронауке. Он смотрит на человека через четыре опоры — физическую, ментальную, духовную и социальную — и помогает выровнять ту, что проседает.</p></details>
+      <details><summary>Что я получу?</summary><p>Профиль по четырём опорам, план практик на 7 дней и рекомендацию, с чего продолжить: программа «4 Опоры» или индивидуальная работа с Леной.</p></details>
+      <details><summary>Это терапия или медицинская помощь?</summary><p>Нет. Тест и практики не являются медицинской диагностикой и не заменяют консультацию врача или психотерапевта.</p></details>
+      <details><summary>Что будет после того, как я выберу план?</summary><p>План на 7 дней откроется сразу. Если выберете программу, вы попадёте на страницу с её форматами. Если индивидуальную работу — сможете написать Лене и договориться о диагностике.</p></details>
+      <details><summary>Сколько это стоит?</summary><p>План на 7 дней — бесплатно. Стоимость программы и индивидуальной работы Лена называет лично, после знакомства с вашей ситуацией.</p></details>
+    </div>
+
+    <div class="summary" id="summary"></div>
+    <p class="small" style="text-align:center;margin-top:30px">© Diamond Generation · Лена Аронов, neuroscience-coach</p>
+  </div>`;
+  const updateSummary=()=>{
+    const o=OPTS[choice];
+    $("summary").innerHTML=`<div class="k">Ваш выбор</div><div class="srow"><span>${o.name}</span><b>${o.price}</b></div>
+      <div class="srow"><span>Подарок: план на 7 дней</span><b>Включён</b></div>
+      <button class="btn wide go" type="button">Получить мой план</button>`;
+    $("summary").querySelector(".go").onclick=go;
+  };
+  const pick=k=>{ choice=k; $("screen").querySelectorAll(".planopt").forEach(b=>b.classList.toggle("on",+b.dataset.k===k)); updateSummary(); };
+  const go=()=>{
+    if(choice===0) return renderWeekScreen();
+    if(choice===1){ location.href=PROGRAM_URL; return; }
+    location.href=BOOKING_URL;
+  };
+  $("screen").querySelectorAll(".planopt").forEach(b=>b.onclick=()=>pick(+b.dataset.k));
+  $("screen").querySelectorAll(".plans + .go").forEach(b=>b.onclick=go);
+  updateSummary();
+  chrome({back:renderResult});
+  window.scrollTo(0,0);
+}
+
+/* ---- план на 7 дней (открывается после выбора) ---- */
+function renderWeekScreen(){
+  stage="week";
+  const w=weakest(score());
+  const DAYS=weekDays(w);
+  let done={}; try{ done=JSON.parse(load("dg_done")||"{}"); }catch(e){}
+  $("screen").innerHTML=`<div class="plan" id="week">
+    <div class="block" style="text-align:center">Ваш план · 7 дней</div>
+    <h1>Моя опора: неделя практик</h1>
+    <p class="small" style="text-align:center;margin:-10px 0 18px">Отмечайте сделанное: страница запомнит прогресс в этом браузере.</p>
+    <div class="days">${DAYS.map((d,k)=>`<div class="day${done[k]?" done":""}"><small>День ${k+1}</small><h3>${esc(d.t)}</h3><p>${esc(d.b)}</p>
+      ${d.a?`<p class="ask">Вопрос дня: ${esc(d.a)}</p>`:""}
+      ${d.final?`<div style="display:grid;gap:10px;margin-top:10px"><a class="btn gold wide" href="${PROGRAM_URL}">Программа «4 Опоры»</a><a class="btn line wide" href="${BOOKING_URL}">Диагностическая встреча с Леной</a></div>`
+        :`<label for="d${k}"><input type="checkbox" id="d${k}" data-k="${k}"${done[k]?" checked":""}> Сделано</label>`}</div>`).join("")}</div>
+  </div>`;
+  chrome({back:renderOffer});
+  $("screen").querySelectorAll(".day input").forEach(c=>c.onchange=()=>{ done[c.dataset.k]=c.checked; store("dg_done",JSON.stringify(done)); c.closest(".day").classList.toggle("done",c.checked); });
+  window.scrollTo(0,0);
+}
+function weekDays(w){ const p=P[w]; return [
+  {t:"Физическая опора · Вернуться в тело", b:"Мы начинаем с тела, потому что на нём держится всё остальное. "+P.phys.practice, a:"Где в теле живёт ваша усталость?"},
+  {t:"Ментальная опора · Разгрузить голову", b:P.ment.practice, a:"Сколько букв «О» у вас получилось?"},
+  {t:"Духовная опора · Ради чего", b:P.spir.practice+" Выберите одно действие: что из этого можно вернуть в эту неделю?", a:"Что вы решили вернуть?"},
+  {t:"Социальная опора · Не про дела", b:P.soc.practice, a:"Что вы почувствовали, когда нажали «отправить»?"},
+  {t:`Ваша опора ещё раз · ${p.name}`, b:"Повторите практику своей проседающей опоры. Второй раз всегда идёт иначе, чем первый. "+p.practice, a:"Что сегодня заметили нового?"},
+  {t:"Все четыре вместе · Утро на четырёх опорах", b:"10 минут: 3 минуты — тело и дыхание. 3 минуты — выписать мысли. 2 минуты — одна фраза «сегодня важно для меня…». 2 минуты — одно сообщение близкому человеку.", a:"Какая из четырёх частей далась легче всего?"},
+  {t:"Итог и следующий шаг", b:"Вы поработали со всеми четырьмя опорами и увидели, какая из них просит внимания больше других. Семь дней дают ощущение направления. Чтобы изменения закрепились, нужна система.", final:true}
+];}
+function store(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+function load(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+
+function onHash(){
+  const h=location.hash.replace("#","");
+  if(h==="test"){ openApp(true); if(stage==="quiz") renderStep(); }
+  else if(h===""||h==="article"){ openApp(false); }
+}
+window.addEventListener("hashchange",onHash);
+document.addEventListener("click",e=>{
+  const a=e.target.closest("a"); if(!a) return;
+  const h=a.getAttribute("href");
+  if(h==="#test"){ e.preventDefault(); openApp(true); if(stage==="quiz"){ i=0; } renderStep(); try{history.replaceState(null,"","#test");}catch(_){} }
+  else if(h==="#"){ e.preventDefault(); openApp(false); try{history.replaceState(null,"","#");}catch(_){} }
+});
+const mr=document.getElementById("moreRv");
+if(mr) mr.onclick=()=>{ document.getElementById("rv3").hidden=false; mr.hidden=true; };
+onHash();
+</script>
+</body>
+</html>
